@@ -1,0 +1,18 @@
+<div class="employee-card">
+    <svg class="status" xmlns="http://www.w3.org/2000/svg" width="0.75rem" height="0.75rem" viewBox="0 0 12 12"
+        [ngStyle]="{ 'color': employee().isDeleted? 'red':'lime' }">
+        <circle cx="6" cy="6" r="6" fill="currentColor" />
+    </svg>
+    <user-avatar-square [label]="employeeLabel()" />
+    <div class="info">
+        <p class="name">{{employee().name}} {{employee().lastName}}</p>
+        <div class="icon-info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zm8-7.175q.125 0 .263-.038t.262-.112L19.6 8.25q.2-.125.3-.312t.1-.413q0-.5-.425-.75T18.7 6.8L12 11L5.3 6.8q-.45-.275-.875-.012T4 7.525q0 .25.1.438t.3.287l7.075 4.425q.125.075.263.113t.262.037" />
+            </svg>
+            <p>{{employee().email}}</p>
+        </div>
+        <p class="role">{{employee().role}}</p>
+    </div>
+</div>

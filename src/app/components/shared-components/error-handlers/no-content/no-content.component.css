@@ -1,0 +1,30 @@
+.no-content-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 15rem;
+  gap: 0.5rem;
+
+  .header {
+    display: flex;
+    gap: 0.1rem;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-size: 1.5rem;
+      font-family: var(--title-font);
+      font-weight: bold;
+    }
+  }
+
+  p {
+    text-align: center;
+  }
+}

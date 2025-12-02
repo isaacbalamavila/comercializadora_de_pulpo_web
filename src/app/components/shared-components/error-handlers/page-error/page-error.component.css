@@ -1,0 +1,33 @@
+.error-container{
+  top: 50%;
+  left: 50%;
+  width: 20rem;
+  transform: translate(-50%,-50%);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  user-select: none;
+
+  .status-code{
+    font-size: 5rem;
+    font-weight: bold;
+    font-family: var(--title-font);
+  }
+
+  .title{
+    font-family: var(--title-font);
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .message{
+    text-align: center;
+  }
+}

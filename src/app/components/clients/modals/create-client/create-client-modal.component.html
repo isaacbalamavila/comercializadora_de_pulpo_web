@@ -1,0 +1,20 @@
+<modal [width]="42" [height]="60" (onClose)="_close()">
+    <h2>Crear Cliente</h2>
+    <p>Los campos con un (*) son obligatorios</p>
+    <form [formGroup]="_createClientForm">
+        <input-form formControlName="name" name="Nombre" label="Nombre" placeholder="Ingrese el nombre" [maxLength]="50"
+            [requiredMark]="true" RegexErrorMessage="Solo letras y espacios (sin espacios al principio o final)" />
+        <input-form formControlName="email" name="Correo" label="Correo Electrónico"
+            placeholder="Ingrese el correo electrónico" [maxLength]="50" [requiredMark]="true" />
+        <div class="double-input">
+
+            <input-form formControlName="phone" name="Teléfono" label="Teléfono" PhoneFormat placeholder="000-000-0000"
+                [maxLength]="12" [customMinLengthForFormat]="10" [requiredMark]="true" />
+
+            <input-form formControlName="rfc" name="Correo" label="RFC" placeholder="XXXXXXXXXXXXX" [maxLength]="13" />
+        </div>
+    </form>
+    <loading-button label="Añadir Proveedor" [isLoading]="_isLoading()" [disabled]="_createClientForm.invalid"
+        type="submit" (onClick)="_createSupplier()" />
+
+</modal>

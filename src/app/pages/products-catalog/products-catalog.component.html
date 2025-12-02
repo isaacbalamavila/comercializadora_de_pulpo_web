@@ -1,0 +1,54 @@
+<div class="container">
+    <header>
+        <page-title title="Productos" (onRefresh)="_getProducts()"/>
+    </header>
+
+    <div class="filters">
+        <search-filter [value]="_searchFilter" />
+        <raw-material-filter [value]="_rawMaterialFilter" />
+    </div>
+
+    <div class="labels">
+        <div class="section">
+
+            <price-filter [value]="_minPriceFilter" placeholder="0.00" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 20 20">
+                <path fill="currentColor" fill-rule="evenodd" d="M1 10a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1"
+                    clip-rule="evenodd" />
+            </svg>
+            <price-filter [value]="_maxPriceFilter" placeholder="0.00" />
+
+        </div>
+
+        <p>Productos Totales: <strong>{{_filteredProducts().length}}</strong>.</p>
+    </div>
+
+
+    <div class="grid">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_products().length === 0) {
+        <no-content type="no-content" title="Sin Productos" details="No se encontraron productos" />
+        }
+        @else{
+        @for (product of _filteredProducts()|paginate: {
+        currentPage : _currentPage(),
+        itemsPerPage: _itemsPerPage(),
+        totalItems: _filteredProducts().length
+        }; track $index) {
+        <product-card class="grid-item" [product]="product" [showStatus]="false"
+            (click)="_viewProductDetails(product)" />
+        }
+        @empty {
+        <no-content type="no-result" title="Sin Resultados" details="Ningún producto coincide con los filtros" />
+        }
+        }
+    </div>
+    @if (_filteredProducts().length > _itemsPerPage()) {
+    <pagination (pageChange)="_currentPage.set($event)" />
+    }
+</div>

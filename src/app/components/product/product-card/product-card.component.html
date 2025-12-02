@@ -1,0 +1,31 @@
+<div class="product-card">
+    @if (showStatus()) {
+    <svg class="status" xmlns="http://www.w3.org/2000/svg" width="0.7rem" height="0.7rem" viewBox="0 0 12 12"
+        [ngStyle]="{ 'color': product().isDeleted ? 'red':'lime' }">
+        <circle cx="6" cy="6" r="6" fill="currentColor" />
+    </svg>
+    }
+    <div class="img-container">
+        <img [hidden]="imgLoading() || imgError()" [src]="product().img" (load)=" this.imgLoading.set(false);"
+            (error)="imgError.set(true)" alt="Imagen del producto">
+        @if (imgLoading() && !imgError()) {
+        <div class="img-skeleton"></div>
+        }
+        @if (imgError()) {
+        <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M5 21q-.825 0-1.412-.587T3 19v-6.6l3 3l4-4l4 4l4-4l3 3V19q0 .825-.587 1.413T19 21zM5 3h14q.825 0 1.413.588T21 5v6.575l-3-3l-4 4l-4-4l-4 4l-3-3V5q0-.825.588-1.412T5 3" />
+        </svg>
+        }
+
+    </div>
+    <section class="info">
+        <h4>{{product().name}}{{product().name.endsWith('.')?'':'.'}}</h4>
+        <span class="description"> {{product().description}}{{product().description.endsWith('.') ? '' : '.'}}</span>
+        <div class="double">
+            <span class="sku">{{product().sku}}</span>
+            <span class="price">{{product().price | currency}}</span>
+        </div>
+
+    </section>
+</div>

@@ -1,0 +1,32 @@
+<pagination-template #p="paginationApi">
+
+    <button class="pagination-previous page-item" [disabled]="p.isFirstPage()" [class.disabled]="p.isFirstPage()"
+        (click)="pageChanged(p.getCurrent() - 1)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M321.94 98L158.82 237.78a24 24 0 0 0 0 36.44L321.94 414c15.57 13.34 39.62 2.28 39.62-18.22v-279.6c0-20.5-24.05-31.56-39.62-18.18" />
+        </svg>
+    </button>
+    @for (page of p.pages; track $index) {
+    <button class="page-item" [class.current]="p.getCurrent() === page.value" (click)="pageChanged(page.value)">
+        @if(p.getCurrent()===page.value){
+
+        <span>{{ page.label }}</span>
+        }
+        @else{
+
+        <span>{{ page.label }}</span>
+        }
+    </button>
+    }
+
+
+    <button class="pagination-next page-item" [disabled]="p.isLastPage()" [class.disabled]="p.isLastPage()"
+        (click)="pageChanged(p.getCurrent() + 1)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="m190.06 414l163.12-139.78a24 24 0 0 0 0-36.44L190.06 98c-15.57-13.34-39.62-2.28-39.62 18.22v279.6c0 20.5 24.05 31.56 39.62 18.18" />
+        </svg>
+    </button>
+
+</pagination-template>

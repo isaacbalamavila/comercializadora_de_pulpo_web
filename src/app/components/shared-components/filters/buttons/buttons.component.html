@@ -1,0 +1,8 @@
+<div class="buttons-filter-container">
+    <button class="option" [class.selected]="value() == null" (click)="value.set(null)">Todos</button>
+    @for (option of options; track $index) {
+    <button class="option" [class.selected]="value() == option.value" (click)="value.set(option.value)">
+        {{option.label}}
+    </button>
+    }
+</div>

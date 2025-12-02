@@ -1,0 +1,7 @@
+<button [class]="btnClass()" [disabled]="isLoading() || disabled()" (click)="_onClick()" [type]="type()">
+  @if (isLoading()) {
+  <small-loader />
+  } @else {
+  {{ label() }}
+  }
+</button>

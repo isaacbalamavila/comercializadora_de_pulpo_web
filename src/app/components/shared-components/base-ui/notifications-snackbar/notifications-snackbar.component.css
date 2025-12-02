@@ -1,0 +1,67 @@
+.notification {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  padding-right: 1.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 18px 10px 22px -7px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  overflow: hidden;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+    color: var(--primary-color);
+
+    .title {
+      font-family: var(--title-font);
+      font-weight: bold;
+    }
+
+    .message {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.notification.info {
+  border-left: 0.5rem solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.notification.error {
+  border-left: 0.5rem solid red;
+  color: red;
+}
+
+.notification.success {
+  border-left: 0.5rem solid green;
+  color: green;
+}
+
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-radius: 0.1rem;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: fillBar linear forwards;
+}
+
+@keyframes fillBar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

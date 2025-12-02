@@ -1,0 +1,25 @@
+<modal [width]="45" [height]="60" (onClose)="_close()">
+    <h2>Crear Empleado</h2>
+    <p>Los campos con un (*) son obligatorios</p>
+    <form [formGroup]="_createEmployeeForm" (submit)="_createEmployee()">
+        <div class="double-input">
+            <input-form formControlName="name" name="Nombre" label="Nombre" placeholder="Ingrese el nombre"
+                [maxLength]="50" [requiredMark]="true"
+                RegexErrorMessage="Solo letras y un nombre" />
+            <input-form formControlName="lastName" name="Apellido" label="Apellido" placeholder="Ingrese el apellido"
+                [maxLength]="50" [requiredMark]="true"
+                RegexErrorMessage="Solo letras y un apellido" />
+        </div>
+        <input-form formControlName="email" name="Correo" label="Correo Electrónico" placeholder="Ingrese el correo"
+            [maxLength]="50" [requiredMark]="true"/>
+        <div class="double-input">
+            <input-form formControlName="phone" name="Teléfono" label="Teléfono" PhoneFormat placeholder="000-000-0000"
+                [maxLength]="12" [customMinLengthForFormat]="10" />
+
+            <select-roles-form formControlName="role" />
+        </div>
+    </form>
+    <loading-button label="Añadir Empleado" [isLoading]="_isLoading()" [disabled]="_createEmployeeForm.invalid"
+        type="submit" (onClick)="_createEmployee()"/>
+
+</modal>

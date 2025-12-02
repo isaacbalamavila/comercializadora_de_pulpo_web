@@ -1,0 +1,50 @@
+<div class="form-input">
+  <label>{{ label() }} {{requiredMark()? '*':''}}</label>
+
+  <div class="input-container">
+    <input #input [type]="type()" [placeholder]="placeholder()" (input)="_onInput($event)" (focus)="_onFocus()"
+      [attr.maxlength]="maxLength() ? maxLength() : null" [attr.minlength]="minLength() ? minLength() : null"
+      [disabled]="_disabled()" [attr.min]="type() == 'number' ? 0 : null" />
+
+    @if (_value()) {
+    <button tabindex="-1" type="button" (click)="clearValue()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4" />
+      </svg>
+    </button>
+    }
+  </div>
+
+  @if (_errors().length > 0 && _touched()) {
+  @switch (_errors()[0].name) {
+  @case ('required') {
+  <small>{{name()}} obligatorio.</small>
+  }
+  @case ('minlength'){
+  <small>{{_article()}} {{name()}} debe tener mínimo
+    {{customMinLengthForFormat() ?? _errors()[0].value.requiredLength}}
+    caracteres.</small>
+  }
+  @case ('maxlength'){
+  <small>{{_article()}} {{name()}} debe tener máximo
+    {{customMaxLengthForFormat() ?? _errors()[0].value.requiredLength}} caracteres.</small>
+  }
+  @case ('email'){
+  <small>Formato del correo inválido.</small>
+  }
+  @case ('pattern') {
+  <small>{{RegexErrorMessage()}} {{RegexErrorMessage().endsWith('.') ? '' : '.'}}</small>
+  }
+  @case('min'){
+  <small>Debe ser mayor a {{_errors()[0].value.min < 1 ? '0' : _errors()[0].value.min - 1}}.</small>
+  }
+  @case('max') {
+  <small>Debe ser menor o igual a {{_errors()[0].value.max}}.</small>
+  }
+  @default {
+  <small>{{_article()}} {{name()}} contiene errores.</small>
+  }
+  }
+  }
+</div>

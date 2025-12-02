@@ -1,0 +1,55 @@
+<modal [width]="50" [height]="75" (onClose)="_close()">
+    <h2>Editar Producto</h2>
+    <div class="base-form">
+        <div class="image-section">
+            <div class="image" (click)="fileInput.click()">
+                <input type="file" #fileInput hidden (change)="_onFileSelected($event)" accept="image/*">
+                <img [src]="_imageSelected() ? _imagePreviewURL(): originalProduct.img " alt="">
+                @if (_imgLoading()) {
+                <small-loader />
+                }
+                <svg class="change-image" xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m.91 16.15a.5.5 0 0 1-.85-.35V17H12c-1.28 0-2.56-.49-3.54-1.46a5 5 0 0 1-1.14-5.3c.19-.51.86-.64 1.24-.25c.22.22.27.54.17.82c-.46 1.24-.2 2.68.8 3.68c.7.7 1.62 1.03 2.54 1.01v-.94c0-.45.54-.67.85-.35l1.62 1.62c.2.2.2.51 0 .71zm2.53-4.13a.78.78 0 0 1-.17-.82c.46-1.24.2-2.68-.8-3.68c-.7-.7-1.62-1.04-2.53-1.02v.94c0 .45-.54.67-.85.35L9.46 8.18c-.2-.2-.2-.51 0-.71l1.62-1.62a.5.5 0 0 1 .85.35v.81c1.3-.02 2.61.45 3.6 1.45a5 5 0 0 1 1.14 5.3c-.19.52-.85.65-1.23.26" />
+                </svg>
+            </div>
+        </div>
+        <div class="form-section">
+            <form [formGroup]="_updateProductInfoForm">
+                <h3>Información del Producto</h3>
+                <p>Los campos con un (*) son obligatorios</p>
+                <input-form label="Nombre" name="Nombre del Producto" formControlName="name" />
+                <div class="description">
+                    <label for="description">Descripción *</label>
+                    <textarea formControlName="description" name="description" rows="4" [maxLength]="_maxLenght"
+                        placeholder="Ingrese la descripción"></textarea>
+                    <div class="labels">
+                        @if (description?.invalid && description?.touched) {
+                        @if (description?.errors) {
+                        @if (description?.hasError('required')) {
+                        <small class="error">La descripción es obligatoria.</small>
+                        }
+                        @else if (description?.hasError('minlength')) {
+                        <small class="error">Mínimo 10 caracteres.</small>
+                        }
+                        }
+                        }
+                        @else{
+                        <div></div>
+                        }
+                        <small>{{description?.value.length}}/{{_maxLenght}}</small>
+                    </div>
+                </div>
+                <div class="double-input">
+                    <input-form formControlName="price" label="Precio ($)" name="Precio" type="number"
+                        [requiredMark]="true" placeholder="100.00" />
+                    <input-form formControlName="stockMin" label="Stock Mínimo" name="Stock Mínimo" type="number"
+                        [requiredMark]="true" placeholder="10" />
+                </div>
+            </form>
+            <loading-button [disabled]="_updateProductInfoForm.invalid || (!_hasChanges() && !_imageSelected())"
+                label="Guardar Cambios" [isLoading]="_isLoading()" (onClick)="_updateProduct()" />
+        </div>
+    </div>
+</modal>

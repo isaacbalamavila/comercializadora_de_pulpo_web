@@ -1,0 +1,16 @@
+.main-container{
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+    background-color: var(--primary-color);
+    display: flex;
+    overflow: hidden;
+
+    main{
+        flex: 1;
+        background-color: var(--background-color);
+        border-radius: 0.5rem 0 0 0.5rem;
+        overflow: hidden;
+    }
+    
+}

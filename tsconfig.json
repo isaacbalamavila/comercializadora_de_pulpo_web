@@ -16,7 +16,53 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+
+    "baseUrl": "src",
+    "paths": {
+      // Core
+      "@services/*": ["app/core/services/*"],
+      "@guards/*": ["app/core/guards/*"],
+      "@interceptors/*": ["app/core/interceptors/*"],
+      "@interfaces/*": ["app/core/Interfaces/*"],
+      "@directives/*": ["app/core/directives/*"],
+      "@animations":["app/animations/animations.ts"],
+
+      //Utils
+      "@utils/*":["app/utils/*"],
+      "@regex/*": ["app/utils/regex.ts"],
+
+      //Helpers
+      "@helpers/*":["app/components/helpers/*"],
+      "@contact-helpers/*":["app/components/shared-components/helpers/*"],
+
+      // Base UI
+      "@base-ui/*": ["app/components/shared-components/base-ui/*"],
+      "@loaders/*": ["app/components/shared-components/loaders/*"],
+      "@error-handlers/*": [
+        "app/components/shared-components/error-handlers/*"
+      ],
+
+      // Modals
+      "@modals/*": ["app/components/shared-components/base-ui/modals/*"],
+      "@employee-modals/*": ["app/components/employees/modals/*"],
+      "@suppliers-modals/*": ["app/components/suppliers/modals/*"],
+
+      //Shared Components
+      "@shared-components/*": ["app/components/shared-components/*"],
+      "@custom-inputs/*": ["app/components/shared-components/custom-inputs/*"],
+      "@employee/*": ["app/components/employees/*"],
+      "@suppliers/*": ["app/components/suppliers/*"],
+      "@buttons/*": ["app/components/shared-components/buttons/*"],
+      "@filters":["app/components/shared-components/filters/*"],
+      "@products/*":["app/components/products/*"],
+
+      // Form
+      "@forms/*": ["app/components/shared-components/forms/*"],
+
+      //Filters
+      "@filters/*":["app/components/shared-components/filters/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

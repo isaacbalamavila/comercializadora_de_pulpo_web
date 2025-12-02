@@ -1,0 +1,6 @@
+.container {
+  search-filter {
+    align-self: flex-end;
+    width: 20%;
+  }
+}

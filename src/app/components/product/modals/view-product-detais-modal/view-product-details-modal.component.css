@@ -1,0 +1,46 @@
+modal {
+  header {
+    margin-bottom: 1rem;
+  }
+  img {
+    max-height: 12rem;
+    min-width: 10rem;
+    aspect-ratio: 5/6;
+  }
+
+  .section-picture {
+    display: flex;
+    gap: 2rem;
+
+    .info-section {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 0.5rem;
+
+      .title {
+        margin-bottom: 0.25rem;
+      }
+
+      .double {
+        width: 100%;
+        justify-content: start;
+        gap: 2rem;
+
+        .info {
+          display: flex;
+        }
+      }
+
+      p {
+        &::first-letter {
+          text-transform: uppercase;
+        }
+
+        copy-button{
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+}

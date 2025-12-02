@@ -1,0 +1,40 @@
+<div class="container">
+    <header>
+        <page-title title="Proveedores" (onRefresh)="_getSuppliers()" />
+        <add-button label="Añadir Proveedor" (onAdd)="_createSupplier()" />
+    </header>
+    <search-filter [value]="_searchFilter" />
+    <div class="labels">
+        <buttons-filter [value]="_statusFilter" [options]="[
+            {label: 'Activos', value: false},
+            {label: 'Inactivos', value: true}
+        ]" />
+        <p>Proveedores Totales: <strong>{{_filteredSuppliers().length}}</strong>.</p>
+    </div>
+    <div class="grid">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_suppliers().length === 0) {
+        <no-content type="no-content" title="Sin Proveedores" details="No se encontraron proveedores" />
+        }
+        @else{
+        @for (supplier of _filteredSuppliers()|paginate: {
+        currentPage : _currentPage(),
+        itemsPerPage: _itemsPerPage(),
+        totalItems: _filteredSuppliers().length
+        }; track $index) {
+        <supplier-card class="grid-item" (click)="_viewSupplierDetails(supplier)" [supplier]="supplier" />
+        }
+        @empty {
+        <no-content type="no-result" title="Sin Resultados" details="Ningún proveedor coincide con los filtros" />
+        }
+        }
+    </div>
+    @if (_filteredSuppliers().length > _itemsPerPage()) {
+    <pagination (pageChange)="_currentPage.set($event)" />
+    }
+</div>

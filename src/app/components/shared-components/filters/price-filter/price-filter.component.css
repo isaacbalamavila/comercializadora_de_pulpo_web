@@ -1,0 +1,25 @@
+.input-filter-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 0 1.5rem 0 0.5rem;
+
+  input {
+    padding: 0.5rem 0.5rem 0.5rem 0.2rem !important;
+    max-width: 5rem;
+    padding: 0.8rem 0.5rem;
+  }
+
+  .clear-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    padding: 0;
+    display: flex;
+    align-content: center;
+    background-color: transparent;
+    color: var(--primary-color);
+  }
+}

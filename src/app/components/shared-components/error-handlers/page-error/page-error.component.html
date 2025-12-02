@@ -1,0 +1,44 @@
+<div class="error-container">
+    <span class="status-code">{{ statusCode ?? 500 }}</span>
+    <span class="title">{{ title ?? '¡Ocurrió un Error!' }}</span>
+    <span class="message">
+        @switch (statusCode) {
+        @case (400) {
+        'La solicitud es incorrecta. Verifica los datos enviados.'
+        }
+        @case (401) {
+        'No estás autorizado para realizar esta acción.'
+        }
+        @case (403) {
+        'Acceso denegado. No tienes permisos suficientes.'
+        }
+        @case (404) {
+        {{ resourceName ? `${resourceName} no encontrado.` : `Recurso no encontrado.` }}
+        }
+        @case (409) {
+        'Conflicto detectado. El recurso ya existe o está en uso.'
+        }
+        @case (422) {
+        'Los datos proporcionados no son válidos. Corrige los errores e intenta de nuevo.'
+        }
+        @case (429) {
+        'Demasiadas solicitudes. Intenta nuevamente más tarde.'
+        }
+        @case (500) {
+        'Error interno del servidor. Intenta más tarde o contacta al administrador.'
+        }
+        @case (502) {
+        'Puerta de enlace incorrecta. El servidor de destino no respondió correctamente.'
+        }
+        @case (503) {
+        'Servicio no disponible. El servidor está en mantenimiento o saturado.'
+        }
+        @case (504) {
+        'Tiempo de espera agotado. El servidor no respondió a tiempo.'
+        }
+        @default {
+        'Error desconocido. Intenta nuevamente o contacta soporte técnico.'
+        }
+        }
+    </span>
+</div>

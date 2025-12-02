@@ -1,0 +1,36 @@
+<div class="container">
+    <header>
+        <page-title title="Clientes" (onRefresh)="_getClients()" />
+        <add-button label="Añadir Cliente" (onAdd)="_createClient()"/>
+    </header>
+    <search-filter [value]="_searchFilter" />
+    <div class="labels">
+        <buttons-filter [value]="_statusFilter" [options]="[
+            {label: 'Activos', value: false},
+            {label: 'Inactivos', value: true}
+        ]" />
+        <p>Clientes Totales: <strong>{{_filteredClients().length}}</strong>.</p>
+    </div>
+    <div class="grid">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()?.statusCode" />
+        }
+        @else if (_clients().length === 0) {
+        <no-content type="no-content" title="Sin Clientes" details="No se encontraron clientes" />
+        }
+        @else {
+        @for (client of _filteredClients(); track $index) {
+        <client-card [client]="client" class="grid-item" (click)="_viewDetails(client)"/>
+        }
+        @empty {
+        <no-content type="no-result" title="Sin Resultados" details="Ningún cliente coincide con los filtros" />
+        }
+        }
+    </div>
+    @if (_filteredClients().length > _itemsPerPage()) {
+    <pagination (pageChange)="_currentPage.set($event)" />
+    }
+</div>

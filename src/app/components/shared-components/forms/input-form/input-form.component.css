@@ -1,0 +1,43 @@
+.form-input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  label {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .input-container {
+    position: relative;
+
+    input {
+      padding-right: 2rem;
+
+      &:focus {
+        outline: 2px solid var(--primary-color);
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0;
+      display: flex;
+      align-content: center;
+      background-color: transparent;
+      color: var(--primary-color);
+    }
+  }
+
+  small {
+    font-family: var(--body-font);
+    font-weight: 500;
+    font-size: 0.7rem;
+    text-align: right;
+    color: red;
+  }
+}

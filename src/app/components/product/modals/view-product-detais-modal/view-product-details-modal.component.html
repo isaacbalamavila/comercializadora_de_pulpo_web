@@ -1,0 +1,70 @@
+<modal [width]="50" [height]="75" (onClose)="_close()">
+    @if (_isLoading() && !_error()) {
+    <page-loader />
+    }
+    @if(!_isLoading() && _error()){
+    <page-error [statusCode]="_error()!.statusCode" />
+    }
+    @if (!_isLoading() && !_error()) {
+    <header [style.color]="_product()!.isDeleted ? 'red':'lime'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 2048 2048">
+            <path fill="currentColor"
+                d="M960 256q115 0 221 30t198 84t169 130t130 168t84 199t30 221q0 115-30 221t-84 198t-130 169t-168 130t-199 84t-221 30q-115 0-221-30t-198-84t-169-130t-130-168t-84-199t-30-221q0-115 30-221t84-198t130-169t168-130t199-84t221-30" />
+        </svg>
+
+        <h2>{{_product()!.name}}</h2>
+    </header>
+    <div class="section-picture">
+        <img [src]="_product()!.img" alt="Imagen del Producto">
+        <section class="info-section">
+            <p><strong>SKU: </strong>{{_product()!.sku}} <copy-button [value]="_product()!.sku"/> </p>
+            <strong class="title">Descripción: </strong>
+            <p>{{_product()!.description}}{{_product()!.description.endsWith('.') ? '' : '.'}}</p>
+            <hr>
+            <div class="double">
+                <div class="info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 14 14">
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M7 0a4.5 4.5 0 0 0-2.977 7.875c.337.297.528.66.55 1.024c.021.355-.113.788-.572 1.247c-.558.558-1.35.757-1.978.623a1.32 1.32 0 0 1-.734-.407C1.119 10.168 1 9.89 1 9.5a.5.5 0 0 0-1 0v.828c0 .844.299 1.618.796 2.223a.6.6 0 0 1 .28.156l.003.004l.045.036c.046.034.122.086.23.14c.212.106.55.222 1.021.222c1.505 0 2.525-1.24 2.963-2.34a.625.625 0 0 1 1.161.462c-.34.857-1.048 1.956-2.149 2.597h5.3c-1.101-.641-1.808-1.74-2.15-2.597a.625.625 0 1 1 1.162-.462c.438 1.1 1.458 2.34 2.963 2.34c.47 0 .809-.116 1.021-.223a1.5 1.5 0 0 0 .275-.175l.003-.004a.6.6 0 0 1 .28-.156A3.5 3.5 0 0 0 14 10.328V9.5a.5.5 0 1 0-1 0c0 .39-.12.668-.289.862c-.173.199-.425.34-.734.407c-.629.134-1.42-.065-1.978-.623c-.46-.46-.593-.892-.572-1.247c.022-.365.213-.727.55-1.024A4.5 4.5 0 0 0 7 0m-.964 5.25a.786.786 0 1 1-1.572 0a.786.786 0 0 1 1.572 0m2.714.786a.786.786 0 1 0 0-1.572a.786.786 0 0 0 0 1.572"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <strong>{{_product()!.rawMaterial}}</strong>
+                </div>
+                <div class="info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M12 7q.425 0 .713-.288T13 6t-.288-.712T12 5t-.712.288T11 6t.288.713T12 7m2.825 0h1.75q.75 0 1.3.5t.675 1.225l1.425 10q.125.9-.462 1.588T18 21H6q-.925 0-1.513-.687t-.462-1.588l1.425-10Q5.575 8 6.125 7.5t1.3-.5h1.75q-.075-.25-.125-.487T9 6q0-1.25.875-2.125T12 3t2.125.875T15 6q0 .275-.05.513T14.825 7" />
+                    </svg>
+                    <strong>{{_product()!.content}} {{_product()!.unit}}{{_product()!.content > 1 && _product()!.unitId
+                        == 3 ? 's' : ''}}.</strong>
+                </div>
+                <div class="info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 16 16">
+                        <path fill="currentColor"
+                            d="M12.32 8a3 3 0 0 0-2-.7H5.63A1.59 1.59 0 0 1 4 5.69a2 2 0 0 1 0-.25a1.59 1.59 0 0 1 1.63-1.33h4.62a1.59 1.59 0 0 1 1.57 1.33h1.5a3.08 3.08 0 0 0-3.07-2.83H8.67V.31H7.42v2.3H5.63a3.08 3.08 0 0 0-3.07 2.83a2 2 0 0 0 0 .25a3.07 3.07 0 0 0 3.07 3.07h4.74A1.59 1.59 0 0 1 12 10.35a2 2 0 0 1 0 .34a1.59 1.59 0 0 1-1.55 1.24h-4.7a1.59 1.59 0 0 1-1.55-1.24H2.69a3.08 3.08 0 0 0 3.06 2.73h1.67v2.27h1.25v-2.27h1.7a3.08 3.08 0 0 0 3.06-2.73v-.34A3.06 3.06 0 0 0 12.32 8" />
+                    </svg>
+                    <strong>{{_product()!.price|currency:' '}}</strong>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <hr>
+    <h4>Detalles de Producción:</h4>
+    <p><strong>Materia prima necesaria por pieza: </strong>{{_product()!.rawMaterialNeededKg}} Kg.</p>
+    <p><strong>Tiempo necesario por pieza: </strong>{{_product()!.timeNeededMin}} min.</p>
+    <p><strong>Stock mínimo establecido: </strong>{{_product()!.stockMin}} pz.</p>
+
+    <div class="options">
+        <loading-button label="Editar" [isLoading]="false" [disabled]="_product()!.isDeleted" (onClick)="_editProduct()"/>
+        @if (_product()!.isDeleted) {
+        <loading-button label="Restaurar" [isLoading]="_restoreLoading()" btnStyle="restore" (onClick)="_restoreProduct()" />
+        }
+        @else {
+        <loading-button label="Eliminar" [isLoading]="_deleteLoading()" btnStyle="delete" (onClick)="_deleteProduct()" />
+        }
+    </div>
+    }
+
+
+</modal>

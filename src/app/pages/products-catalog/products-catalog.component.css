@@ -1,0 +1,23 @@
+.container {
+  .filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+
+    search-input {
+      width: 20%;
+    }
+  }
+
+  .labels {
+    .section {
+      display: flex;
+      align-items: center;
+      gap:0.6rem;
+    }
+  }
+
+  .grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}

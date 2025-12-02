@@ -1,0 +1,5 @@
+button.copy{
+    background-color: transparent;
+    padding: 0;
+    color: var(--primary-color);
+}

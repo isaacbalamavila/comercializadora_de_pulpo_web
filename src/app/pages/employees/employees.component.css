@@ -1,0 +1,11 @@
+.container {
+  .filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+
+    search-input {
+      width: 20%;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<div class="main-container">
+    <div class="login-container">
+        <div class="form-container">
+            <h2>Iniciar Sesión</h2>
+
+            <form #form="ngForm" (ngSubmit)="login()">
+                <p class="span-title">¡Bienvenido a la Comercializadora de Pulpos!</p>
+                <email-input name="email" [(ngModel)]="email" label="Ingrese su correo" [required]="true" />
+                <password-input name="password" [(ngModel)]="password" label="Ingrese su contraseña"
+                    [required]="true" />
+
+                @if (error()) {
+                <error-span [message]="error()!.title || 'Ocurrió un error inesperado'" />
+                }
+                <button [disabled]="form.invalid || isLoading() || tryings >= maxTryings" type="submit">
+                    @if (isLoading()) {
+                    <small-loader />
+                    } @else {
+                    Iniciar Sesión
+                    }
+                </button>
+
+                <a [routerLink]="'/forgot-password'">¿Olvidaste tu constraseña?</a>
+            </form>
+        </div>
+        <div class="span">
+            <img class="logo" src="logo_white_medium.webp" alt="Logo">
+            <h5>Comercializadora <br> de Pulpo</h5>
+        </div>
+    </div>
+</div>

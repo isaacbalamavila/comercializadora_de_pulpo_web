@@ -1,0 +1,51 @@
+<div class="container">
+    <header>
+        <page-title title="Empleados" (onRefresh)="_getEmployees()" />
+        <add-button label="Añadir Empleado" (onAdd)="_createEmployee()" />
+    </header>
+
+    <div class="filters">
+        <search-filter [value]="_searchFilter" />
+        <role-filter [value]="_roleFilter" />
+    </div>
+
+    <div class="labels">
+        <buttons-filter [value]="_statusFilter" [options]="[
+            {label: 'Activos', value: false},
+            {label: 'Inactivos', value: true}
+        ]" />
+
+        <p>Empleados Totales: <strong>{{_filteredEmployees().length}}</strong>.</p>
+    </div>
+
+    <div class="grid">
+
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_employees().length === 0) {
+        <no-content type="no-content" title="Sin Empleados" details="No se encontraron empleados" />
+        }
+        @else {
+        @for (employee of _filteredEmployees() |
+        paginate:{currentPage: _currentPage(),
+        itemsPerPage: _itemsPerPage(),
+        totalItems:_filteredEmployees().length};
+        track $index ) {
+        <employee-card class="grid-item" (click)="_viewDetails(employee)" [employee]="employee" />
+        }
+        @empty {
+        <no-content type="no-result" title="Sin Resultados" details="Ningún empleado coincide con los filtros" />
+        }
+        }
+
+    </div>
+
+    @if (_filteredEmployees().length > _itemsPerPage()) {
+    <pagination (pageChange)="_currentPage.set($event)" />
+    }
+
+</div>

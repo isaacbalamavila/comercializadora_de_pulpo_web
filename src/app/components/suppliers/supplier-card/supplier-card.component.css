@@ -1,0 +1,54 @@
+.supplier-card {
+  position: relative;
+  display: flex;
+  padding: 1rem 1.5rem 1rem 0.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  user-select: none;
+
+  .status {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+
+    .name {
+      font-family: var(--title-font);
+      font-size: 0.9rem;
+      font-weight: 650;
+      text-transform: capitalize;
+
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .icon-info {
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+
+      p {
+        font-size: 0.75rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.user-avatar {
+  display: flex;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  border-radius: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  min-width: 4rem;
+  min-height: 4rem;
+  user-select: none;
+
+  span {
+    font-size: 1.3rem;
+    color: white;
+    font-family: var(--title-font);
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
