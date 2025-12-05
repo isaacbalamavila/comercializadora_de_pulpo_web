@@ -9,17 +9,9 @@
     </button>
     @for (page of p.pages; track $index) {
     <button class="page-item" [class.current]="p.getCurrent() === page.value" (click)="pageChanged(page.value)">
-        @if(p.getCurrent()===page.value){
-
         <span>{{ page.label }}</span>
-        }
-        @else{
-
-        <span>{{ page.label }}</span>
-        }
     </button>
     }
-
 
     <button class="pagination-next page-item" [disabled]="p.isLastPage()" [class.disabled]="p.isLastPage()"
         (click)="pageChanged(p.getCurrent() + 1)">

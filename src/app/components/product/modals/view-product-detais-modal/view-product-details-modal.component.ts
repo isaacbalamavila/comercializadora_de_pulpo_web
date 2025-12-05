@@ -24,10 +24,7 @@ import { CopyButtonComponent } from '@helpers/copy-button/copy-button.component'
   styleUrl: './view-product-details-modal.component.css'
 })
 export class ViewProductDetailsModal implements OnInit {
-
-  //* Subject
-  private _destroy$ = new Subject<void>();
-
+  
   //* Injections
   private readonly _modalService = inject(ModalService);
   private readonly _productService = inject(ProductsService);

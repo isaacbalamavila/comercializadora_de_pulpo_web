@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../enviroment/enviroment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,11 +13,12 @@ import { AuthService } from './auth.service';
 })
 export class EmployeesService {
 
+  //* Injections
+  private readonly _http = inject(HttpClient);
+  private readonly _authService = inject(AuthService);
+
   //* Base URL
   private readonly baseURL: string = `${environment.apiUrl}/users`;
-
-  constructor(private readonly _http: HttpClient, private readonly _authService: AuthService) {
-  }
 
   getEmployees(): Observable<EmployeeDTO[]> {
     const employe = this._authService.getUser()

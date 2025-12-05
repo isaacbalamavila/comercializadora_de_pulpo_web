@@ -1,0 +1,30 @@
+.container {
+  .filters {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+
+    input {
+      background-color: white;
+      width: auto;
+    }
+  }
+
+  .labels {
+    display: flex;
+    justify-content: end;
+  }
+
+  .table-container {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+
+    table {
+      flex: 1;
+      tr {
+        cursor: pointer;
+      }
+    }
+  }
+}

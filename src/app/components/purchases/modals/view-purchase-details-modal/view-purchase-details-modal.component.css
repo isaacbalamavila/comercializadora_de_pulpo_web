@@ -1,0 +1,7 @@
+modal{
+    gap: 0.4rem;
+    
+    .info{
+        text-transform: capitalize;
+    }
+}

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CreateProductDTO } from '@interfaces/Products/CreateProductDTO';
 import { ProductDetailsDTO, ProductDTO } from '@interfaces/Products/ProductDTO';
 import { UpdateProductDTO } from '@interfaces/Products/UpdatedProductDTO';
@@ -11,10 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class ProductsService {
 
+  //* Injections
+  private readonly _http = inject(HttpClient);
+
   //* Base URL
   private readonly baseURL: string = `${environment.apiUrl}/products`;
-
-  constructor(private readonly _http: HttpClient) { }
 
   getProducts(): Observable<ProductDTO[]> {
     return this._http.get<ProductDTO[]>(this.baseURL);
@@ -49,7 +50,7 @@ export class ProductsService {
     const requestBody = new FormData();
 
     //* Map body
-    requestBody.append('name',body.name);
+    requestBody.append('name', body.name);
     requestBody.append('description', body.description);
     requestBody.append('price', body.price.toString());
     requestBody.append('stockMin', body.stockMin.toString());

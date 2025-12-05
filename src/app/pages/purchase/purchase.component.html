@@ -1,0 +1,73 @@
+<div class="container">
+    <header>
+        <h1>Realizar Compra</h1>
+        <user-info />
+    </header>
+
+    <main>
+        <div class="supplier-details">
+            <h3>Información del Proveedor</h3>
+            <search-supplier (onSelect)="_supplierSelected.set($event)" />
+            <hr>
+            @if (_supplierSelected()) {
+            <h4>Proveedor seleccionado</h4>
+            <div class="supplier-label">
+                <div class="circle">
+                    <span>{{_supplierlabel()}}</span>
+                </div>
+                <p>{{_supplierSelected()!.name}}</p>
+            </div>
+            <hr>
+            <div class="info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z" />
+                </svg>
+                <p>{{_supplierSelected()!.email}}</p>
+            </div>
+            <div class="info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z" />
+                </svg>
+                <p>{{_phoneFormat()}}</p>
+            </div>
+            <div class="info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 512 512">
+                    <path fill="currentColor"
+                        d="M32 416a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V222H32Zm66-138a8 8 0 0 1 8-8h92a8 8 0 0 1 8 8v64a8 8 0 0 1-8 8h-92a8 8 0 0 1-8-8ZM464 80H48a16 16 0 0 0-16 16v66h448V96a16 16 0 0 0-16-16" />
+                </svg>
+                <p>{{_supplierSelected()?.rfc ?? 'No agregado'}}</p>
+            </div>
+            }
+        </div>
+
+        <form class="purchase-form" [formGroup]="_createPurchaseForm">
+            <h3>Detalles de la Compra</h3>
+            <div class="field">
+                <span>Materia Prima* :</span>
+                <select-raw-materials-form formControlName="rawMaterial" [showLabel]="false" />
+            </div>
+            <div class="field">
+                <span>Kilogramos Comprados: </span>
+                <input-number-form formControlName="totalKg" label="" name="campo" [showLabel]="false"
+                    [requiredMark]="true" />
+            </div>
+            <div class="field">
+                <span>Precio Por Kilo: </span>
+                <input-number-form formControlName="priceKg" label="" name="precio" [showLabel]="false" />
+            </div>
+            <hr>
+            <div class="total-container">
+                <span>Total:</span>
+                <span class="total">
+                    {{total() | currency}}
+                </span>
+            </div>
+
+            <loading-button [disabled]="_createPurchaseForm.invalid || !_supplierSelected()" label="Confirmar Compra"
+                [isLoading]="_isLoading()" (onClick)="_createPurchase()"/>
+        </form>
+
+    </main>
+</div>

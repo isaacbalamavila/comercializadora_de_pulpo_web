@@ -1,4 +1,5 @@
 .select-form-container {
+  min-width: 12rem;
   position: relative;
   user-select: none;
   display: flex;
@@ -45,7 +46,7 @@
   .dropdown-list {
     position: absolute;
     width: 100%;
-    bottom: 1rem;
+    bottom: -0.5rem;
     left: 0;
     transform: translateY(100%);
     display: flex;

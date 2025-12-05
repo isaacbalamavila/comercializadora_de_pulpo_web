@@ -1,0 +1,44 @@
+<modal [width]="47" [height]="70" (onClose)="_close() ">
+    @if (_isLoading()) {
+    <page-loader />
+    }
+    @else if(_error()){
+    <page-error [statusCode]="_error()!.statusCode" />
+    }
+    @else{
+    <header>
+        <h2>{{purchase()!.sku}}</h2>
+        <copy-button [value]="purchase()!.sku" [size]="1.25" />
+    </header>
+    <h4>Información de la compra:</h4>
+    <div class="info">
+        <p><strong>Materia Prima: </strong>{{purchase()!.rawMaterial}}.</p>
+    </div>
+    <div class="info">
+        <p><strong>Descripción: </strong>{{purchase()!.rawMaterialDescription}}</p>
+    </div>
+    <div class="double">
+        <p><strong>Kilogramos Comprados: </strong>{{purchase()!.totalKg}} kg.</p>
+        <p><strong>Precio por Kilo: </strong>{{purchase()!.priceKg|currency}}.</p>
+        <p><strong>Precio Total: </strong>{{purchase()!.totalPrice |currency}}.</p>
+    </div>
+    <hr>
+    <h4>Información del proveedor:</h4>
+    <div class="info">
+        <p><strong>Nombre del proveedor: </strong>{{purchase()!.supplier}}.</p>
+    </div>
+    <div class="double">
+        <p><strong>Correo: </strong>{{purchase()!.supplierEmail}}.</p>
+        <p><strong>Teléfono: </strong>{{purchase()!.supplierPhone}}.</p>
+    </div>
+    <hr>
+    <h4>Información de gestión:</h4>
+    <div class="info">
+        <p><strong>Comprador:</strong> {{purchase()!.userName}} {{purchase()!.userLastName}}.</p>
+    </div>
+    <div class="info">
+        <p><strong>Fecha de compra:</strong> {{purchase()!.createdAt |date: 'dd/MM/yyyy'}}.</p>
+    </div>
+    }
+
+</modal>

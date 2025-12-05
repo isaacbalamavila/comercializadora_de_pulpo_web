@@ -1,0 +1,45 @@
+.form-input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  label {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .input-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    input {
+      width: 8rem;
+      text-align: center;
+      &:focus {
+        outline: 2px solid var(--primary-color);
+      }
+    }
+
+    button {
+      display: flex;
+      max-width: fit-content;
+      padding: 0.25rem;
+      aspect-ratio: 1/1;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      color: white;
+    }
+  }
+
+  small {
+    font-family: var(--body-font);
+    font-weight: 500;
+    font-size: 0.7rem;
+    text-align: right;
+    color: red;
+  }
+}

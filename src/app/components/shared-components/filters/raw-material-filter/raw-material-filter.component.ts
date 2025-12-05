@@ -28,7 +28,7 @@ export class RawMaterialFilterComponent {
   _options: RawMaterialDTO[] = [];
 
   //* Ref Helper
-  @ViewChild('select', { static: false }) selectRef?: ElementRef;
+  @ViewChild('roleSelect', { static: false }) selectRef?: ElementRef;
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {

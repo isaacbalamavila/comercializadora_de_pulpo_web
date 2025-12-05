@@ -1,0 +1,129 @@
+.container {
+  gap: 2rem;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+
+    .supplier-details {
+      height: fit-content;
+      width: 25%;
+      background-color: white;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      h3,
+      h4 {
+        user-select: none;
+        font-weight: 550;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h4 {
+        font-size: 1rem;
+      }
+
+      hr {
+        width: 100%;
+      }
+
+      .supplier-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .circle {
+          min-width: 3rem;
+          aspect-ratio: 1/1;
+          border-radius: 50%;
+          background-color: var(--primary-color);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          span {
+            color: white;
+            font-family: var(--title-font);
+            font-weight: 600;
+          }
+        }
+
+        p {
+          text-transform: capitalize;
+          font-size: 0.9rem;
+        }
+      }
+
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .purchase-form {
+      flex: 1;
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 1rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      padding-bottom: 2rem;
+
+      hr {
+        width: 100%;
+      }
+
+      .field {
+        display: flex;
+        gap: 1rem;
+        user-select: none;
+
+        span {
+          margin-top: 12px;
+          font-weight: 500;
+        }
+      }
+
+      .total-container {
+        display: flex;
+        flex-direction: column;
+
+        span {
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+
+        .total{
+          font-family: var(--title-font);
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-left: 3rem;
+        }
+      }
+
+      loading-button{
+        min-width: 15rem;
+        align-self: flex-end;
+      }
+    }
+  }
+}

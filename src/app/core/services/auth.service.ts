@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginResponse } from '../Interfaces/Authorization/LoginResponse';
 import { environment } from '../../../enviroment/enviroment';
@@ -15,13 +15,14 @@ import { Roles } from 'config/roles';
 })
 export class AuthService {
 
+  //* Injections
+  private readonly _http = inject(HttpClient);
+
   //* Base URL
   private readonly baseURL: string = `${environment.apiUrl}/authorization`;
 
   //* General Variables
   private user: UserInfo | null = null;
-
-  constructor(private readonly _http: HttpClient) { }
 
   login(body: LoginRequest): Observable<LoginResponse> {
     return this._http.post<LoginResponse>(`${this.baseURL}/login`, body);

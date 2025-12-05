@@ -25,7 +25,7 @@ export function menuItems(): MenuItem[] {
         },
         {
             label: 'Compras',
-            route: '/home/purchases',
+            route: isAdminOrManager() ? '/home/purchases' : '/home/purchase',
             roles: [Roles.admin, Roles.manager, Roles.generalEmployee],
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor" fill-rule="evenodd"

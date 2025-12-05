@@ -1,0 +1,39 @@
+.user-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .circle {
+    border-radius: 50%;
+    min-width: 3rem;
+    background-color: var(--primary-color);
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      color: white;
+      text-transform: uppercase;
+      font-family: var(--title-font);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      text-transform: capitalize;
+      font-weight: 550;
+    }
+
+    .role {
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: gray;
+    }
+  }
+}

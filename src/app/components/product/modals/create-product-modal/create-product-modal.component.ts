@@ -10,13 +10,14 @@ import { NotificationService } from '@services/notifications.service';
 import { ProductsService } from '@services/products.service';
 import { LoadingButtonComponent } from '@shared-components/buttons/loading-button/loading-button.component';
 import { InputFormComponent } from "@shared-components/forms/input-form/input-form.component";
+import { NumberInputComponent } from '@shared-components/forms/number-input/number-input.component';
 import { SelectRawMaterialsFormsComponent } from "@shared-components/forms/select-raw-materials/select-raw-materials-form.component";
 import { SelectUnitsFormsComponent } from "@shared-components/forms/select-units-forms/select-units-forms.component";
 import { NAME_REGEX, EMAIL_REGEX, RFC_REGEX, PRODUCT_NAME_REGEX } from 'config/regex';
 
 @Component({
   selector: 'app-create-product-modal',
-  imports: [BaseModalComponent, InputFormComponent, SelectRawMaterialsFormsComponent, SelectUnitsFormsComponent,
+  imports: [BaseModalComponent, InputFormComponent,NumberInputComponent, SelectRawMaterialsFormsComponent, SelectUnitsFormsComponent,
     ReactiveFormsModule, LoadingButtonComponent],
   templateUrl: './create-product-modal.component.html',
   styleUrl: './create-product-modal.component.css'
@@ -96,7 +97,7 @@ export class CreateProductModal {
     rawMaterialNeeded: this._fb.control<number | null>(null, {
       validators: [
         Validators.required,
-        Validators.min(0.0000000001)
+        Validators.min(0.001)
       ]
     }),
     timeNeeded: this._fb.control<number | null>(null, {
@@ -136,7 +137,6 @@ export class CreateProductModal {
         this._modalService.close<ModalRespose<ProductDTO | null>>({ hasChanges: true, data: res });
       },
       error: (err) => {
-        console.log(err)
         const errorMessage =
           Object.values(err.error.errors || {}).flat()[0] ??
           err?.error?.message ??

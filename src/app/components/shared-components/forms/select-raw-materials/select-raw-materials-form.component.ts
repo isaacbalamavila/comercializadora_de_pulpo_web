@@ -38,6 +38,7 @@ export class SelectRawMaterialsFormsComponent implements OnInit, ControlValueAcc
 
   //* UI Variables
   placeholder = input<string>('Materia Prima');
+  showLabel = input<boolean>(true);
   _isFocus = signal<boolean>(false);
   _isLoading = signal<boolean>(true);
   _label = signal<string | null>(null)
@@ -114,6 +115,10 @@ export class SelectRawMaterialsFormsComponent implements OnInit, ControlValueAcc
       const option = this._options.find(op => op.id === value);
       this._value.set(option!.id);
       this._label.set(option!.name);
+    }
+    else {
+      this._value.set(null);
+      this._label.set(null);
     }
   }
 

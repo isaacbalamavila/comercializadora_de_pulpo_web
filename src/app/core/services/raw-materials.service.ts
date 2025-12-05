@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { RawMaterialDTO } from '@interfaces/Raw Materials/RawMaterialDTO';
 import { environment } from 'enviroment/enviroment';
 import { Observable } from 'rxjs';
@@ -9,12 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class RawMaterialsService {
 
+  //* Injections
+  private readonly _http = inject(HttpClient);
+
   //* Base URL
   private readonly baseURL: string = `${environment.apiUrl}/raw-materials`;
 
-  constructor(private readonly _http: HttpClient) { }
-
-  getRawMaterials():Observable<RawMaterialDTO[]>{
+  getRawMaterials(): Observable<RawMaterialDTO[]> {
     return this._http.get<RawMaterialDTO[]>(this.baseURL);
   }
 

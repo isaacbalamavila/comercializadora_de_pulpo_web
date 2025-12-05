@@ -1,11 +1,11 @@
 <modal [width]="50" [height]="75" (onClose)="_close()">
-    @if (_isLoading() && !_error()) {
+    @if (_isLoading()) {
     <page-loader />
     }
-    @if(!_isLoading() && _error()){
+    @else if(_error()){
     <page-error [statusCode]="_error()!.statusCode" />
     }
-    @if (!_isLoading() && !_error()) {
+    @else {
     <header [style.color]="_product()!.isDeleted ? 'red':'lime'">
         <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 2048 2048">
             <path fill="currentColor"
@@ -17,7 +17,7 @@
     <div class="section-picture">
         <img [src]="_product()!.img" alt="Imagen del Producto">
         <section class="info-section">
-            <p><strong>SKU: </strong>{{_product()!.sku}} <copy-button [value]="_product()!.sku"/> </p>
+            <p><strong>SKU: </strong>{{_product()!.sku}} <copy-button [value]="_product()!.sku" /> </p>
             <strong class="title">Descripción: </strong>
             <p>{{_product()!.description}}{{_product()!.description.endsWith('.') ? '' : '.'}}</p>
             <hr>
@@ -56,12 +56,15 @@
     <p><strong>Stock mínimo establecido: </strong>{{_product()!.stockMin}} pz.</p>
 
     <div class="options">
-        <loading-button label="Editar" [isLoading]="false" [disabled]="_product()!.isDeleted" (onClick)="_editProduct()"/>
+        <loading-button label="Editar" [isLoading]="false" [disabled]="_product()!.isDeleted"
+            (onClick)="_editProduct()" />
         @if (_product()!.isDeleted) {
-        <loading-button label="Restaurar" [isLoading]="_restoreLoading()" btnStyle="restore" (onClick)="_restoreProduct()" />
+        <loading-button label="Restaurar" [isLoading]="_restoreLoading()" btnStyle="restore"
+            (onClick)="_restoreProduct()" />
         }
         @else {
-        <loading-button label="Eliminar" [isLoading]="_deleteLoading()" btnStyle="delete" (onClick)="_deleteProduct()" />
+        <loading-button label="Eliminar" [isLoading]="_deleteLoading()" btnStyle="delete"
+            (onClick)="_deleteProduct()" />
         }
     </div>
     }

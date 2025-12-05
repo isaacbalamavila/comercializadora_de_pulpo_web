@@ -1,11 +1,11 @@
 <modal [width]="45" [height]="50" (onClose)="_close()">
-    @if (_isLoading() && !_error()) {
+    @if (_isLoading()) {
     <page-loader />
     }
-    @if(!_isLoading() && _error()){
+    @else if(_error()){
     <page-error [statusCode]="_error()!.statusCode" />
     }
-    @if (!_isLoading() && !_error()) {
+    @else {
     <h2>{{_product()!.name}}</h2>
     <div class="section-picture">
         <img [src]="_product()!.img" alt="Imagen del Producto">

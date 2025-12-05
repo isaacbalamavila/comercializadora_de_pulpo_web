@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { RequestSupplierDTO } from '@interfaces/Suppliers/CreateSupplierDTO';
 import { SupplierDetailsDTO } from '@interfaces/Suppliers/SupplierDTO';
 import { SupplierDTO } from '@interfaces/Suppliers/SupplierDTO';
@@ -11,14 +11,18 @@ import { Observable } from 'rxjs';
 })
 export class SuppliersService {
 
+  //* Injections
+  private readonly _http = inject(HttpClient);
+
   //* Base URL
   private readonly baseURL: string = `${environment.apiUrl}/suppliers`;
 
-  constructor(private readonly _http: HttpClient) {
-  }
-
   getSuppliers(): Observable<SupplierDTO[]> {
     return this._http.get<SupplierDTO[]>(this.baseURL);
+  }
+
+  getActiveSuppliers(): Observable<SupplierDTO[]> {
+    return this._http.get<SupplierDTO[]>(this.baseURL, { params: { "onlyActives": true } });
   }
 
   getSupplierDetails(id: string): Observable<SupplierDetailsDTO> {
@@ -29,7 +33,7 @@ export class SuppliersService {
     return this._http.post<SupplierDTO>(this.baseURL, body);
   }
 
-  updateSupplier(id:string,body: RequestSupplierDTO): Observable<SupplierDetailsDTO> {
+  updateSupplier(id: string, body: RequestSupplierDTO): Observable<SupplierDetailsDTO> {
     return this._http.put<SupplierDetailsDTO>(`${this.baseURL}/${id}`, body);
   }
 

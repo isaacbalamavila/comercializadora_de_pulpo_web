@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { UnitDTO } from '@interfaces/Units/UnitDTO';
 import { environment } from 'enviroment/enviroment';
 import { Observable } from 'rxjs';
@@ -9,13 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class UnitsService {
 
+  //* Injections
+  private readonly _http = inject(HttpClient);
+
   //* Base URL
   private readonly baseURL: string = `${environment.apiUrl}/units`;
 
-  constructor(private readonly _http: HttpClient) {
-  }
-
-  getUnits():Observable<UnitDTO[]>{
+  getUnits(): Observable<UnitDTO[]> {
     return this._http.get<UnitDTO[]>(this.baseURL)
   }
 }

@@ -1,0 +1,57 @@
+<div class="container">
+    <header>
+        <page-title title="Compras" (onRefresh)="_getPurchases()" />
+        <add-button label="Realizar Compra" (onAdd)="_makePurchase()"/>
+    </header>
+    <div class="filters">
+        <search-filter [value]="_searchFilter" />
+        <suppliers-filter (onSelect)="_supplierFilter.set($event)" />
+        <input type="date" (change)="_onDateChange($event)">
+        <raw-material-filter [value]="_rawMaterialFilter" />
+    </div>
+    <div class="labels">
+        <p>Compras Totales: <strong>{{_response()?.total ?? 0}}</strong>.</p>
+    </div>
+
+    <div class="table-container">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_response()!.purchases.length === 0) {
+        <no-content type="no-content" title="Sin Resultados" details="No se encontraron registros de compras" />
+        }
+        @else {
+        <table>
+            <thead>
+                <th>SKU</th>
+                <th>Materia Prima</th>
+                <th>Proveedor</th>
+                <th>Fecha</th>
+                <th>Precio (Kg)</th>
+                <th>Total (Kg)</th>
+                <th>Total ($)</th>
+            </thead>
+            <tbody>
+                @for (purchase of _response()!.purchases; track $index) {
+                <tr (click)="_viewPurchaseDetails(purchase.id)">
+                    <td>{{purchase.sku}}</td>
+                    <td>{{purchase.rawMaterial}}</td>
+                    <td>{{purchase.supplier}}</td>
+                    <td>{{purchase.createdAt | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{purchase.priceKg | currency}}</td>
+                    <td>{{purchase.totalKg}}</td>
+                    <td>{{purchase.totalPrice | currency}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+    @if (!_isLoading() && !_error() && _response()!.totalPages > 1) {
+    <paginacion-backend [totalPages]="_response()!.totalPages" [currentPage]="_currentPage()"
+        (pageChange)="_currentPage.set($event)" />
+    }
+</div>

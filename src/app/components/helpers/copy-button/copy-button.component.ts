@@ -1,22 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'copy-button',
-  imports: [],
+  standalone: true,
   templateUrl: './copy-button.component.html',
   styleUrl: './copy-button.component.css'
 })
 export class CopyButtonComponent {
-  @Input({ required: true }) value?: string | null;
 
-  isCopied: boolean = false;
+  value = input.required<string | null>();
+  size = input<number>(1);
+
+  isCopied = false;
 
   copy(): void {
     this.isCopied = true;
-    this.value ? navigator.clipboard.writeText(this.value) : navigator.clipboard.writeText('');
-    setTimeout(() => {
-      this.isCopied = false;
-    }, 500);
+    navigator.clipboard.writeText(this.value() ?? '');
+    setTimeout(() => this.isCopied = false, 500);
   }
-
 }

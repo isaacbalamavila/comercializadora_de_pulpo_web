@@ -29,9 +29,6 @@ import { ViewProductDetailsModal } from 'app/components/product/modals/view-prod
 })
 export class ProductsComponent implements OnInit {
 
-  //* Subject
-  private _destroy$ = new Subject<void>();
-
   //* Injections
   private readonly _modalService = inject(ModalService);
   private readonly _productService = inject(ProductsService);

@@ -39,6 +39,14 @@ h5 {
   margin: 0;
 }
 
+hr{
+  color: gray;
+}
+
+h4{
+  font-size: 1.05rem;
+}
+
 h1 {
   font-size: 2rem;
 }
@@ -239,7 +247,8 @@ body {
   -webkit-backdrop-filter: blur(1px);
   z-index: 9999;
 
-  *,*{
+  *,
+  * {
     min-width: 0;
   }
 
@@ -415,11 +424,12 @@ body {
 
 /** Scroll Styles */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #e5e7eb;
+  /*background: #e5e7eb;*/
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -429,5 +439,47 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--hover-color-btn);
+  background: transparent;
+}
+
+/** Table */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background-color: var(--primary-color);
+
+    th {
+      padding: 0.6rem;
+      font-family: var(--title-font);
+      color: white;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+
+  tbody {
+    background-color: white;
+
+    td {
+      font-family: var(--body-font);
+      font-size: 0.9rem;
+      padding: 0.7rem 0.5rem;
+      text-align: center;
+      text-transform: capitalize;
+
+      &.copy {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    tr:nth-child(even) {
+      background-color: #f0f1f2;
+    }
+  }
 }

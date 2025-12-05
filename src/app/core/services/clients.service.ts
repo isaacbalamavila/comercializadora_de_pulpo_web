@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ClientDetailsDTO, ClientDTO } from '@interfaces/Clients/ClientDTO';
 import { ClientRequestDTO } from '@interfaces/Clients/ClientRequestDTO';
 import { GENERAL_PUBLIC_CLIENT_ID } from 'config/constansts';
@@ -11,10 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class ClientsService {
 
+  //* Injections
+  private readonly _http = inject(HttpClient);
+
   //* Base URL
   private readonly baseURL: string = `${environment.apiUrl}/clients`;
-
-  constructor(private readonly _http: HttpClient) { }
 
   getClients(): Observable<ClientDTO[]> {
     return this._http.get<ClientDTO[]>(this.baseURL, { params: { 'idExcluded': GENERAL_PUBLIC_CLIENT_ID } });
