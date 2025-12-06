@@ -142,7 +142,7 @@ export class CreateProductModal {
           err?.error?.message ??
           err?.error?.errorDetails ??
           err?.error?.title ??
-          "Ocurrió un error al intentar registrar al cliente";
+          "Ocurrió un error al intentar registrar el producto";
 
         this._notificationService.error('Ocurrió un Error', errorMessage);
         this._isLoading.set(false)

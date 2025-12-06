@@ -4,7 +4,7 @@
         <add-button label="Realizar Compra" (onAdd)="_makePurchase()"/>
     </header>
     <div class="filters">
-        <search-filter [value]="_searchFilter" />
+        <search-filter [value]="_searchFilter" placeholder="Buscar (SKU)"/>
         <suppliers-filter (onSelect)="_supplierFilter.set($event)" />
         <input type="date" (change)="_onDateChange($event)">
         <raw-material-filter [value]="_rawMaterialFilter" />

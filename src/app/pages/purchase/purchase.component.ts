@@ -119,7 +119,7 @@ export class PurchaseComponent {
             err?.error?.message ??
             err?.error?.errorDetails ??
             err?.error?.title ??
-            "Ocurrió un error al intentar registrar al cliente";
+            "Ocurrió un error al intentar realizar la compra";
 
           this._notificationService.error('Ocurrió un Error', errorMessage);
           this._isLoading.set(false)

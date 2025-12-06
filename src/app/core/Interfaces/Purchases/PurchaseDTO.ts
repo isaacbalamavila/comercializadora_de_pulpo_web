@@ -4,8 +4,8 @@ export interface PurchaseDTO {
     supplier: string;
     rawMaterial: string;
     totalKg: number;
-    totalPrice: number;
     priceKg: number;
+    totalPrice: number;
     createdAt: string;
 }
 
