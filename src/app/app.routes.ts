@@ -17,6 +17,8 @@ import { productsCatalogAccessGuard } from '@guards/products-catalog-access.guar
 import { PurchasesComponent } from './pages/purchases/purchases.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { purchasesGuard as purchasesAccessGuard } from '@guards/purchases.guard';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { SuppliesInventoryComponent } from './pages/supplies-inventory/supplies-inventory.component';
 
 
 export const routes: Routes = [
@@ -34,6 +36,9 @@ export const routes: Routes = [
             { path: 'products-catalog', component: ProductsCatalogComponent, canActivate: [productsCatalogAccessGuard] },
             { path: 'purchases', component: PurchasesComponent, canActivate: [purchasesAccessGuard] },
             { path: 'purchase', component: PurchaseComponent },
+            {path: 'inventory', component: InventoryComponent, children:[
+                {path: 'supplies', component: SuppliesInventoryComponent}
+            ]},
             { path: '**', component: WorkingOnComponent }
         ]
     }

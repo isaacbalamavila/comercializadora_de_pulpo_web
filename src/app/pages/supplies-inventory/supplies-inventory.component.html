@@ -1,0 +1,55 @@
+<div class="container">
+    <header>
+        <page-title title="Inventario de Insumos" (onRefresh)="_getSupplies()"/>
+    </header>
+
+    <div class="filters">
+        <search-filter [value]="_searchFilter" />
+        <raw-material-filter [value]="_rawMaterialFilter" />
+    </div>
+    <div class="labels">
+        <buttons-filter [value]="_availablesFilter" [options]="[
+            {label: 'Disponibles', value:true},
+            {label: 'Agotados', value:false}
+        ]" />
+        <p>Lotes Totales: <strong>{{_response()?.total ?? 0}}</strong>.</p>
+    </div>
+
+    <div class="table-container">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_response()!.supplies.length === 0) {
+        <no-content type="no-content" title="Sin Resultados" details="No se encontraron registros de compras" />
+        }
+        @else {
+        <table>
+            <thead>
+                <th>SKU</th>
+                <th>Materia Prima</th>
+                <th>Fecha de Compra</th>
+                <th>Fecha de Caducidad</th>
+                <th>Kilogramos Disponibles</th>
+            </thead>
+            <tbody>
+                @for (supply of _response()!.supplies; track $index) {
+                <tr (click)="_viewSupplyDetails(supply)">
+                    <td>{{supply.sku}}</td>
+                    <td>{{supply.rawMaterial}}</td>
+                    <td>{{supply.purchaseDate| date: 'dd/MM/yyyy'}}</td>
+                    <td>{{supply.expirationDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{supply.weightRemainKg | number:'1.2-2' }} kg</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+    @if (!_isLoading() && !_error() && _response()!.totalPages > 1) {
+    <paginacion-backend [totalPages]="_response()!.totalPages" [currentPage]="_currentPage()"
+        (pageChange)="_currentPage.set($event)" />
+    }
+</div>

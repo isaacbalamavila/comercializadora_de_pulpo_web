@@ -75,13 +75,12 @@ export class NumberInputComponent implements OnInit, ControlValueAccessor, Valid
     if (value) {
       this._value.set(value);
       this.inputElement().nativeElement.value = value.toString();
+      this._onValidatorChange();
     }
     else {
       this._value.set(0)
       this.inputElement().nativeElement.value = '';
     }
-
-
   }
 
   registerOnChange(fn: any): void {
@@ -116,9 +115,11 @@ export class NumberInputComponent implements OnInit, ControlValueAccessor, Valid
 
   //* HelpersButtons
   _helperButton(value: number): void {
+    this._touched.set(true);
     if (value <= 0) {
       value = this.min();
     }
+
     this.writeValue(value);
     this._onChange(value);
     this._onTouched();

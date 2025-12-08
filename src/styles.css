@@ -39,11 +39,11 @@ h5 {
   margin: 0;
 }
 
-hr{
+hr {
   color: gray;
 }
 
-h4{
+h4 {
   font-size: 1.05rem;
 }
 
@@ -73,9 +73,9 @@ button {
   border-radius: 0.5rem;
   font-family: var(--title-font);
   font-weight: 600;
-  font-size: 1rem;
   background-color: var(--primary-color);
   color: white;
+  font-size: 0.9rem;
   border: none;
   outline: none;
   cursor: pointer;
@@ -119,6 +119,8 @@ button.clear {
   background-color: red;
   color: white;
   font-size: 0.9rem;
+  font-family: var(--title-font);
+  font-weight: 600;
   padding: 0.6rem 1.2rem;
 
   &:not(:disabled) {
@@ -134,6 +136,8 @@ button.clear {
 
 .btn-green-modal {
   background-color: limegreen;
+  font-family: var(--title-font);
+  font-weight: 600;
   color: white;
   font-size: 0.9rem;
   padding: 0.6rem 1.2rem;

@@ -61,12 +61,12 @@ export class ProductsService {
     return this._http.put<ProductDetailsDTO>(`${this.baseURL}/${id}`, requestBody);
   }
 
-  deleteProduct(id: string): Observable<boolean> {
-    return this._http.delete<boolean>(`${this.baseURL}/${id}`);
+  deleteProduct(id: string): Observable<void> {
+    return this._http.delete<void>(`${this.baseURL}/${id}`);
   }
 
-  restoreProduct(id: string): Observable<boolean> {
-    return this._http.patch<boolean>(`${this.baseURL}/${id}/restore`, {});
+  restoreProduct(id: string): Observable<void> {
+    return this._http.patch<void>(`${this.baseURL}/${id}/restore`, {});
   }
 
 

@@ -18,9 +18,9 @@ import { ViewPurchaseDetailsModal } from 'app/components/purchases/modals/view-p
 
 @Component({
   selector: 'app-purchases',
-  imports: [PageTitleComponent, AddButtonComponent, RawMaterialFilterComponent, PageLoaderComponent,
+  imports: [PageTitleComponent, AddButtonComponent, SearchComponent, RawMaterialFilterComponent, PageLoaderComponent,
     PageErrorComponent, NoContentComponent, CurrencyPipe, DatePipe, PaginacionComponent, SuppliersFilterComponent,
-    SearchComponent
+
   ],
   templateUrl: './purchases.component.html',
   styleUrl: './purchases.component.css'
@@ -28,9 +28,9 @@ import { ViewPurchaseDetailsModal } from 'app/components/purchases/modals/view-p
 export class PurchasesComponent implements OnInit {
 
   //* Injections
-  _purchaseService = inject(PurchaseService);
-  _modalService = inject(ModalService);
-  _router = inject(Router)
+  private readonly _purchaseService = inject(PurchaseService);
+  private readonly _modalService = inject(ModalService);
+  private readonly _router = inject(Router)
 
   //* Data Variables
   _response = signal<PurchasePaginationResposne | null>(null);
@@ -39,7 +39,7 @@ export class PurchasesComponent implements OnInit {
   _isLoading = signal<boolean>(true);
   _error = signal<ErrorResponse | null>(null);
   _currentPage = signal<number>(1);
-  _itemsPerPage: number = 13;
+  _itemsPerPage: number = 12;
 
   //* Filters
   _rawMaterialFilter = signal<number | null>(null);
@@ -111,7 +111,7 @@ export class PurchasesComponent implements OnInit {
   }
 
   //* Redirect to Make a Purchase
-  _makePurchase():void{
+  _makePurchase(): void {
     this._router.navigate(['home/purchase']);
   }
 }

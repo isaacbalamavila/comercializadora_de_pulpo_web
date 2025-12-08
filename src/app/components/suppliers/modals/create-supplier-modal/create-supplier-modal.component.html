@@ -1,7 +1,7 @@
 <modal [width]="42" [height]="80" (onClose)="_close()">
     <h2>Crear Proveedor</h2>
     <p>Los campos con un (*) son obligatorios</p>
-    <form [formGroup]="_createSupplierForm" (submit)="_createSupplier()">
+    <form [formGroup]="_createSupplierForm">
         <input-form formControlName="name" name="Nombre" label="Nombre" placeholder="Ingrese el nombre" [maxLength]="50"
             [requiredMark]="true" RegexErrorMessage="Solo letras y espacios (sin espacios al principio o final)" />
 

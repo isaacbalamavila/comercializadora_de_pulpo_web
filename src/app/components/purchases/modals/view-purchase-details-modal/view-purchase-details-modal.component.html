@@ -12,32 +12,32 @@
     </header>
     <h4>Información de la compra:</h4>
     <div class="info">
-        <p><strong>Materia Prima: </strong>{{purchase()!.rawMaterial}}.</p>
+        <p><b>Materia Prima: </b>{{purchase()!.rawMaterial}}.</p>
     </div>
     <div class="info">
-        <p><strong>Descripción: </strong>{{purchase()!.rawMaterialDescription}}</p>
+        <p><b>Descripción: </b>{{purchase()!.rawMaterialDescription}}</p>
     </div>
     <div class="double">
-        <p><strong>Kilogramos Comprados: </strong>{{purchase()!.totalKg}} kg.</p>
-        <p><strong>Precio por Kilo: </strong>{{purchase()!.priceKg|currency}}.</p>
-        <p><strong>Precio Total: </strong>{{purchase()!.totalPrice |currency}}.</p>
+        <p><b>Kilogramos Comprados: </b>{{purchase()!.totalKg}} kg.</p>
+        <p><b>Precio por Kilo: </b>{{purchase()!.priceKg|currency}}.</p>
+        <p><b>Precio Total: </b>{{purchase()!.totalPrice |currency}}.</p>
     </div>
     <hr>
     <h4>Información del proveedor:</h4>
     <div class="info">
-        <p><strong>Nombre del proveedor: </strong>{{purchase()!.supplier}}.</p>
+        <p><b>Nombre del proveedor: </b>{{purchase()!.supplier}}.</p>
     </div>
     <div class="double">
-        <p><strong>Correo: </strong>{{purchase()!.supplierEmail}}.</p>
-        <p><strong>Teléfono: </strong>{{purchase()!.supplierPhone}}.</p>
+        <p><b>Correo: </b>{{purchase()!.supplierEmail}}.</p>
+        <p><b>Teléfono: </b>{{purchase()!.supplierPhone}}.</p>
     </div>
     <hr>
     <h4>Información de gestión:</h4>
     <div class="info">
-        <p><strong>Comprador:</strong> {{purchase()!.userName}} {{purchase()!.userLastName}}.</p>
+        <p><b>Comprador:</b> {{purchase()!.userName}} {{purchase()!.userLastName}}.</p>
     </div>
     <div class="info">
-        <p><strong>Fecha de compra:</strong> {{purchase()!.createdAt |date: 'dd/MM/yyyy'}}.</p>
+        <p><b>Fecha de compra:</b> {{purchase()!.createdAt |date: 'dd/MM/yyyy'}}.</p>
     </div>
     }
 

@@ -1,3 +1,5 @@
+import { PaginationResponse } from "@interfaces/Pagination/PaginationResponseInterface";
+
 export interface PurchaseDTO {
     id: string;
     sku: string;
@@ -17,9 +19,6 @@ export interface PurchaseDetailsDTO extends PurchaseDTO {
     rawMaterialDescription: string;
 }
 
-export interface PurchasePaginationResposne {
-    page: number;
-    total: number;
-    totalPages: number;
+export interface PurchasePaginationResposne extends PaginationResponse{
     purchases: PurchaseDTO[];
 }

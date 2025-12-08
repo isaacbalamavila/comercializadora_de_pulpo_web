@@ -35,7 +35,7 @@ export function menuItems(): MenuItem[] {
         },
         {
             label: 'Inventario',
-            route: '/home/inventory',
+            route: '/home/inventory/supplies',
             roles: [Roles.admin, Roles.generalEmployee, Roles.manager],
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 512 512">
                     <path fill="currentColor"

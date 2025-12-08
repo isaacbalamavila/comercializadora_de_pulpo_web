@@ -1,0 +1,45 @@
+<modal [width]="45" [height]="70" (onClose)="_close()">
+    @if (_isLoading()) {
+    <page-loader />
+    }
+    @else if(_error()){
+    <page-error [statusCode]="_error()!.statusCode" />
+    }
+    @else{
+    <header>
+        <h2>{{_supply()!.sku}}</h2>
+        <copy-button [value]="_supply()!.sku" [size]="1.25" />
+    </header>
+
+    <h4>Información de la compra:</h4>
+    <div class="double">
+        <p><b>SKU de compra: </b>{{_supply()!.purchaseSku}}.</p>
+        <p><b>Materia prima: </b>{{_supply()!.rawMaterial}}.</p>
+    </div>
+    <hr>
+    <h4>Información del insumo:</h4>
+    <div class="double">
+        <p><b>Fecha de Compra: </b>{{_supply()!.purchaseDate | date: 'dd/MM/yyyy'}}.</p>
+        <p><b>Fecha de Caducidad: </b>{{_supply()!.expirationDate | date: 'dd/MM/yyyy'}}.</p>
+    </div>
+    <div class="double">
+        <p><b>Kilogramos Originales: </b>{{_supply()!.weightKg | number:'1.2-2'}} kg.</p>
+        <p><b>Kilogramos Disponibles: </b>{{_supply()!.weightRemainKg | number:'1.2-2'}} kg.</p>
+    </div>
+    <div class="info">
+    </div>
+    <hr>
+    <div class="double">
+        <h4>Editar Kilogramos Disponibles</h4>
+    </div>
+    <form [formGroup]="_updateWeightForm">
+        <input-number-form label="Kilogramos Disponibles:" name="Kilos" formControlName="weight" [max]="_supply()!.weightRemainKg" />
+        <loading-button
+            [disabled]="_updateWeightForm.invalid || this._updateWeightForm.get('weight')!.value == _supply()!.weightRemainKg || _supply()!.weightRemainKg === 0"
+            label="Guardar" [isLoading]="_updateLoading()" (onClick)="_updateWeight()" />
+    </form>
+    <hr>
+    <loading-button [disabled]="_supply()?.weightRemainKg == 0" label="Dar de Baja" btnStyle="delete"
+        [isLoading]="_disposeLoading()" (onClick)="_disposeSupply()" />
+    }
+</modal>
