@@ -82,7 +82,7 @@
             </div>
             }
 
-            <loading-button [disabled]="_createPurchaseForm.invalid || !_supplierSelected()" label="Confirmar Compra"
+            <loading-button [disabled]="_createPurchaseForm.invalid || !_supplierSelected() || !_allowSchedule" label="Confirmar Compra"
                 [isLoading]="_isLoading()" (onClick)="_createPurchase()" />
         </form>
 
