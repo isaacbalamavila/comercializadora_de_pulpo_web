@@ -1,12 +1,6 @@
 .container {
   gap: 2rem;
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   main {
     flex: 1;
     display: flex;
@@ -112,7 +106,7 @@
           font-weight: 600;
         }
 
-        .total{
+        .total {
           font-family: var(--title-font);
           font-size: 2.5rem;
           font-weight: 700;
@@ -120,7 +114,34 @@
         }
       }
 
-      loading-button{
+      .out-schedule {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        width: 100%;
+        padding: 1rem;
+        background-color: red;
+        border-radius: 0.5rem;
+        color: white;
+        user-select: none;
+
+        .content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          .title {
+            color: white;
+            font-weight: 550;
+          }
+
+          .body {
+            color: white;
+          }
+        }
+      }
+
+      loading-button {
         min-width: 15rem;
         align-self: flex-end;
       }

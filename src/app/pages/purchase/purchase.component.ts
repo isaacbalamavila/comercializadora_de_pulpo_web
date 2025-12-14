@@ -52,6 +52,8 @@ export class PurchaseComponent {
   });
   _phoneFormat = computed<string>(() => this._supplierSelected ? phoneFormatter(this._supplierSelected()!.phone) : '');
 
+  _allowSchedule: boolean;
+
   //* Form
   _createPurchaseForm: FormGroup = this._fb.group({
     rawMaterial: this._fb.control<number | null>(null, {
@@ -73,6 +75,19 @@ export class PurchaseComponent {
 
   //* Constructor
   constructor() {
+
+    //* Schedule Validation
+    const now = new Date();
+    const limit = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      15, // 3PM
+      0
+    );
+
+    this._allowSchedule = now < limit;    
+
     this._createPurchaseForm.get('totalKg')?.valueChanges.subscribe(() => {
       this.updateTotal();
     });
@@ -103,13 +118,13 @@ export class PurchaseComponent {
     }
 
     this._modalService.open(ConfirmDialogComponent, {
-      title: 'Confirmación de Compra',
-      message: '¿Estás seguro realizar la compra?'
+      title: 'Confirmar Compra',
+      message: '¿Estás seguro de realizar la compra?'
     }).pipe(filter((confirmation: boolean) => confirmation),
       switchMap(() => this._purchaseService.createPurchase(body)))
       .subscribe({
         next: (res) => {
-          this._notificationService.success("Compra Exitosa", `La compra se registro con éxito con el SKU '${res.sku}'`);
+          this._notificationService.success('Compra Exitosa', `La compra se registro con éxito con el SKU '${res.sku}'`);
           this._supplierSelected.set(null);
           this._createPurchaseForm.reset();
         },
@@ -126,9 +141,5 @@ export class PurchaseComponent {
         },
         complete: () => this._isLoading.set(false)
       });
-
-
   }
-
-
 }
