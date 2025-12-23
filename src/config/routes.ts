@@ -9,6 +9,7 @@ export function menuItems(): MenuItem[] {
             label: 'Dashboard',
             route: '/home/',
             roles: ['*'],
+            exact : true,
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M14 9q-.425 0-.712-.288T13 8V4q0-.425.288-.712T14 3h6q.425 0 .713.288T21 4v4q0 .425-.288.713T20 9zM4 13q-.425 0-.712-.288T3 12V4q0-.425.288-.712T4 3h6q.425 0 .713.288T11 4v8q0 .425-.288.713T10 13zm10 8q-.425 0-.712-.288T13 20v-8q0-.425.288-.712T14 11h6q.425 0 .713.288T21 12v8q0 .425-.288.713T20 21zM4 21q-.425 0-.712-.288T3 20v-4q0-.425.288-.712T4 15h6q.425 0 .713.288T11 16v4q0 .425-.288.713T10 21z" />
@@ -18,6 +19,7 @@ export function menuItems(): MenuItem[] {
             label: 'Ventas',
             route: '/home/sales',
             roles: [Roles.admin, Roles.generalEmployee, Roles.manager],
+            exact: false,
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M2 17h20v4H2zM6.25 7H9V6H6V3h8v3h-3v1h6.8c1 0 2 1 2.2 2l.5 7h-17l.55-7c0-1 1-2 2.2-2M13 9v2h5V9zM6 9v1h2V9zm3 0v1h2V9zm-3 2v1h2v-1zm3 0v1h2v-1zm-3 2v1h2v-1zm3 0v1h2v-1zM7 4v1h6V4z" />
@@ -27,6 +29,7 @@ export function menuItems(): MenuItem[] {
             label: 'Compras',
             route: isAdminOrManager() ? '/home/purchases' : '/home/purchase',
             roles: [Roles.admin, Roles.manager, Roles.generalEmployee],
+            exact: false,
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor" fill-rule="evenodd"
                         d="M12.052 1.25h-.104c-.899 0-1.648 0-2.242.08c-.628.084-1.195.27-1.65.725c-.456.456-.642 1.023-.726 1.65c-.057.427-.074 1.446-.078 2.32c-2.022.067-3.237.303-4.08 1.147C2 8.343 2 10.229 2 14s0 5.657 1.172 6.828S6.229 22 10 22h4c3.771 0 5.657 0 6.828-1.172S22 17.771 22 14s0-5.657-1.172-6.828c-.843-.844-2.058-1.08-4.08-1.146c-.004-.875-.02-1.894-.078-2.32c-.084-.628-.27-1.195-.726-1.65c-.455-.456-1.022-.642-1.65-.726c-.594-.08-1.344-.08-2.242-.08m3.196 4.752c-.005-.847-.019-1.758-.064-2.097c-.063-.461-.17-.659-.3-.789s-.328-.237-.79-.3c-.482-.064-1.13-.066-2.094-.066s-1.612.002-2.095.067c-.461.062-.659.169-.789.3s-.237.327-.3.788c-.045.34-.06 1.25-.064 2.097Q9.34 5.999 10 6h4q.662 0 1.248.002M12 9.25a.75.75 0 0 1 .75.75v.01c1.089.274 2 1.133 2 2.323a.75.75 0 0 1-1.5 0c0-.384-.426-.916-1.25-.916s-1.25.532-1.25.916s.426.917 1.25.917c1.385 0 2.75.96 2.75 2.417c0 1.19-.911 2.048-2 2.323V18a.75.75 0 0 1-1.5 0v-.01c-1.089-.274-2-1.133-2-2.323a.75.75 0 0 1 1.5 0c0 .384.426.916 1.25.916s1.25-.532 1.25-.916s-.426-.917-1.25-.917c-1.385 0-2.75-.96-2.75-2.417c0-1.19.911-2.049 2-2.323V10a.75.75 0 0 1 .75-.75"
@@ -37,6 +40,7 @@ export function menuItems(): MenuItem[] {
             label: 'Inventario',
             route: '/home/inventory/supplies',
             roles: [Roles.admin, Roles.generalEmployee, Roles.manager],
+            exact: false,
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 512 512">
                     <path fill="currentColor"
                         d="M509.5 184.6L458.9 32.8C452.4 13.2 434.1 0 413.4 0H272v192h238.7c-.4-2.5-.4-5-1.2-7.4M240 0H98.6c-20.7 0-39 13.2-45.5 32.8L2.5 184.6c-.8 2.4-.8 4.9-1.2 7.4H240zM0 224v240c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V224z" />
@@ -46,6 +50,7 @@ export function menuItems(): MenuItem[] {
             label: 'Congelación',
             route: '/home/freezing-proccess',
             roles: [Roles.admin, Roles.manager],
+            exact: false,
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <g fill="none" fill-rule="evenodd">
                         <path
@@ -59,6 +64,7 @@ export function menuItems(): MenuItem[] {
             label: 'Proveedores',
             route: '/home/suppliers',
             roles: [Roles.admin, Roles.manager],
+            exact: false,
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor" fill-rule="evenodd"
                         d="M2 2a1 1 0 0 0-1 1v14c0 1.354.897 2.498 2.129 2.872a3 3 0 0 0 5.7.128h6.342a3 3 0 0 0 5.7-.128A3 3 0 0 0 23 17v-4a5 5 0 0 0-5-5h-4V3a1 1 0 0 0-1-1zm13.171 16H14v-8h4a3 3 0 0 1 3 3v4a1 1 0 0 1-.293.707a3 3 0 0 0-5.536.293m-9.878.293a1 1 0 1 1 1.414 1.414a1 1 0 0 1-1.414-1.414M17 19a1 1 0 1 1 2 0a1 1 0 0 1-2 0"
@@ -69,6 +75,7 @@ export function menuItems(): MenuItem[] {
             label: 'Productos',
             route: isAdminOrManager() ? '/home/products' : '/home/products-catalog',
             roles: ['*'],
+            exact: false,
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 512 512">
                     <path fill="currentColor"
                         d="M454.65 169.4A31.82 31.82 0 0 0 432 160h-64v-16a112 112 0 0 0-224 0v16H80a32 32 0 0 0-32 32v216c0 39 33 72 72 72h272a72.22 72.22 0 0 0 50.48-20.55a69.48 69.48 0 0 0 21.52-50.2V192a31.75 31.75 0 0 0-9.35-22.6M176 144a80 80 0 0 1 160 0v16H176Z" />
@@ -77,6 +84,7 @@ export function menuItems(): MenuItem[] {
         {
             label: 'Empleados',
             route: '/home/employees',
+            exact: false,
             roles: [Roles.admin],
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor"
@@ -87,6 +95,7 @@ export function menuItems(): MenuItem[] {
             label: 'Clientes',
             route: '/home/clients',
             roles: [Roles.admin, Roles.manager],
+            exact: false,
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M21 2H6a2 2 0 0 0-2 2v3H2v2h2v2H2v2h2v2H2v2h2v3a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1m-8 2.999c1.648 0 3 1.351 3 3A3.01 3.01 0 0 1 13 11c-1.647 0-3-1.353-3-3.001c0-1.649 1.353-3 3-3M19 18H7v-.75c0-2.219 2.705-4.5 6-4.5s6 2.281 6 4.5z" />
@@ -96,6 +105,7 @@ export function menuItems(): MenuItem[] {
             label: 'Reportes',
             route: '/home/reports',
             roles: [Roles.admin, Roles.manager],
+            exact: false,
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 20 20">
                     <path fill="currentColor" fill-rule="evenodd"
                         d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7.414A2 2 0 0 0 15.414 6L12 2.586A2 2 0 0 0 10.586 2zm2 10a1 1 0 1 0-2 0v3a1 1 0 1 0 2 0zm2-3a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0v-5a1 1 0 0 1 1-1m4-1a1 1 0 1 0-2 0v7a1 1 0 1 0 2 0z"
@@ -105,6 +115,7 @@ export function menuItems(): MenuItem[] {
         {
             label: 'Ajustes',
             route: '/home/settings',
+            exact: false,
             roles: ['*'],
             icon: ` <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
                     <path fill="currentColor" d="m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zm2.8-6.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5" />

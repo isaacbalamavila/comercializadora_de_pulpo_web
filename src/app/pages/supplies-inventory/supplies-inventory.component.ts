@@ -1,7 +1,9 @@
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, effect, HostListener, inject, OnInit, signal } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, effect, HostListener, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageTitleComponent } from '@base-ui/page-title/page-title.component';
 import { PaginacionComponent } from '@base-ui/paginacion-backend/paginacion.component';
+import { SupplyStatusComponent } from '@base-ui/supply-status/supply-status.component';
 import { NoContentComponent } from '@error-handlers/no-content/no-content.component';
 import { PageErrorComponent } from '@error-handlers/page-error/page-error.component';
 import { ErrorResponse } from '@interfaces/ErrorInterface';
@@ -18,15 +20,16 @@ import { ViewSupplyDetailsModalComponent as ViewSupplyDetailsModal } from 'app/c
 @Component({
   selector: 'app-supplies-inventory',
   imports: [PageTitleComponent, SearchComponent, RawMaterialFilterComponent, ButtonsFilterComponent, PageLoaderComponent, PageErrorComponent
-    , NoContentComponent, DatePipe, CommonModule, PaginacionComponent],
+    , NoContentComponent, DatePipe, SupplyStatusComponent, CommonModule, PaginacionComponent],
   templateUrl: './supplies-inventory.component.html',
   styleUrl: './supplies-inventory.component.css'
 })
-export class SuppliesInventoryComponent implements OnInit {
+export class SuppliesInventoryComponent {
 
   //* Injections
   private readonly _suppliesService = inject(SuppliesInventoryService);
   private readonly _modalService = inject(ModalService);
+  private readonly _router = inject(Router);
 
   //* Data Variables
   _response = signal<SuppliesPaginationResponseDTO | null>(null);
@@ -35,17 +38,12 @@ export class SuppliesInventoryComponent implements OnInit {
   _isLoading = signal<boolean>(true);
   _error = signal<ErrorResponse | null>(null);
   _currentPage = signal<number>(1);
-  _itemsPerPage: number = 12;
+  _itemsPerPage: number = 11;
 
   //* Filters
   _rawMaterialFilter = signal<number | null>(null);
   _searchFilter = signal<string | null>(null);
   _availablesFilter = signal<boolean | null>(null);
-
-  //* Component Init
-  ngOnInit(): void {
-    this._getSupplies();
-  }
 
   //* Host Listener
   @HostListener('window:keydown', ['$event'])
@@ -116,6 +114,11 @@ export class SuppliesInventoryComponent implements OnInit {
           });
         }
       });
+  }
+
+  //* Go to the product batches inventory
+  _redirectToProductBatches():void{
+    this._router.navigate(['home/inventory/products-batches']);
   }
 
 }

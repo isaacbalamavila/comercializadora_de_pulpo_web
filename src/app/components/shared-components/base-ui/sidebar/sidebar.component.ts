@@ -22,7 +22,7 @@ export class SidebarComponent {
   //* UI Variables
 
   isMinimize: boolean = true;
-  safeRoutes: { route: string; label: string; icon: SafeHtml }[];
+  safeRoutes: { route: string; label: string; exact:boolean;icon: SafeHtml }[];
 
   constructor() {
 

@@ -52,6 +52,7 @@ h1 {
 }
 
 p,
+b,
 strong,
 li,
 a,
@@ -486,4 +487,14 @@ table {
       background-color: #f0f1f2;
     }
   }
+}
+
+/** Utilities */
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.capitalize{
+  text-transform:capitalize;
 }

@@ -1,0 +1,65 @@
+<modal [width]="45" [height]="70" (onClose)="_close()">
+    @if (_isLoading()) {
+    <page-loader />
+    }
+    @else if (_error()) {
+    <page-error [statusCode]="_error()!.statusCode" />
+    }
+    @else {
+    <header>
+        <h2>Detalles del Proceso ({{_process()!.product!.sku}})</h2>
+    </header>
+    <hr>
+    <h4>Información del Proceso:</h4>
+    <div class="info">
+        <p class="uppercase"><b>ID: </b>{{_process()!.id}}.</p>
+        <copy-button [value]="_process()!.id" />
+    </div>
+    <div class="double">
+        <div class="info">
+            <p><b>Fecha de Inicio: </b>{{_process()!.startDate|date:'dd/MM/yyyy'}}.</p>
+        </div>
+        <div class="info">
+            <p><b>Fecha de Fin: </b>{{_process()?.endDate ? (_process()!.endDate| date: 'dd/MM/yyyy')
+                :(_process()!.status.id=== 2 ? 'En Curso':'Sin Definir')}}.</p>
+        </div>
+    </div>
+    <div class="double">
+        <div class="info">
+            <p><b>Estado: </b></p>
+            <status-label [status]="_process()!.status.id" />
+        </div>
+        <div class="info">
+            <p><b>Cantidad a producir: </b>{{_process()!.quantity}} piezas.</p>
+        </div>
+    </div>
+    <hr>
+    <h4>Información de Producción:</h4>
+    <p class="capitalize"><b>Producto: </b>{{_process()!.product.name}}.</p>
+    <div class="double">
+        <div class="info">
+            <p><b>SKU: </b>{{_process()!.product.sku}}.</p>
+            <copy-button [value]="_process()!.product.sku" />
+        </div>
+        <div class="info">
+            <p><b>Contenido: </b>{{_process()!.product.content}} {{_process()!.product.unit}}.</p>
+        </div>
+    </div>
+    <div class="double">
+        <div class="info">
+            <p><b>Materia Prima: </b>{{_process()!.product.rawMaterial}}.</p>
+        </div>
+        <div class="info">
+            <p><b>Materia Prima Necesaria (Pz): </b>{{_process()!.product.rawMaterialNeededKg}} kg.</p>
+        </div>
+    </div>
+    <p>
+        <b>Materia Prima Usada en el Proceso: </b>
+        {{_process()!.product.rawMaterialNeededKg * _process()!.quantity | number}} kg.
+    </p>
+    <p class="capitalize">
+        <b>Usuario Asignado: </b>
+        {{_process()!.user.name}} {{_process()!.user.lastName}}.
+    </p>
+    }
+</modal>

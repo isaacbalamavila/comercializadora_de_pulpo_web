@@ -62,7 +62,7 @@ export class ViewProductDetailsModal implements OnInit {
         this._product.set(res);
       },
       error: (err) => {
-        this._error.set({ statusCode: err.status, title: '' });
+        this._error.set({ statusCode: err.status});
         this._isLoading.set(false);
       },
       complete: () => this._isLoading.set(false)

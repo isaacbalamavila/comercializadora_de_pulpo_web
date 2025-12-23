@@ -1,0 +1,60 @@
+<div class="container">
+    <header>
+        <page-title title="Procesos de Producción y Congelación" (onRefresh)="_getProcesses()" />
+        <add-button label="Crear Proceso" (onAdd)="_createProcess()"/>
+    </header>
+    <div class="filters">
+        <product-filter (onSelect)="_productFilter.set($event)" />
+        <user-filter (onSelect)="_userFilter.set($event)" />
+    </div>
+    <div class="labels">
+        <buttons-filter [value]="_statusFilter" [options]="[
+            {label: 'Pendientes', value:1},
+            {label: 'En proceso', value:2},
+            {label: 'Terminados', value:3},
+        ]" />
+        <p>Procesos Totales: <strong>{{_response()?.total ?? 0}}</strong>.</p>
+    </div>
+
+
+    <div class="table-container">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_response()!.processes.length == 0) {
+        <no-content type="no-content" title="Sin Resultados" details="No se encontraron procesos" />
+        }
+        @else {
+        <table>
+            <thead>
+                <th>SKU (Producto)</th>
+                <th>Producto</th>
+                <th>Empleado</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Fin</th>
+                <th>Estado</th>
+            </thead>
+            <tbody>
+                @for (process of _response()!.processes; track $index) {
+                <tr (click)="_viewProcessDetails(process)">
+                    <td>{{process.productSku}}</td>
+                    <td>{{process.product}}</td>
+                    <td>{{process.user}}</td>
+                    <td>{{process.startDate| date: 'dd/MM/yyyy'}}</td>
+                    <td>{{process.endDate ? (process.endDate| date: 'dd/MM/yyyy') :
+                        (process.statusId == 2 ? 'En curso':'Sin Definir')}}</td>
+                    <td><status-label [status]="process.statusId" /> </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+    @if (!_isLoading() && !_error() && _response()!.totalPages > 1) {
+    <paginacion-backend [totalPages]="_response()!.totalPages" [currentPage]="_currentPage()"
+        (pageChange)="_currentPage.set($event)" />
+    }
+</div>

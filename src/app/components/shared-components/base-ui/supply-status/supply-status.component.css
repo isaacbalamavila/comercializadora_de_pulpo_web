@@ -1,0 +1,14 @@
+span {
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+
+  &.out {
+    background-color: red;
+  }
+
+  &.available {
+    background-color: #8BC24A;
+  }
+}

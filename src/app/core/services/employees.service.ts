@@ -30,6 +30,16 @@ export class EmployeesService {
     return this._http.get<EmployeeDTO[]>(this.baseURL, { headers });
   }
 
+  getAllEmployees(): Observable<EmployeeDTO[]> {
+    const employe = this._authService.getUser()
+
+    const headers = new HttpHeaders({
+      userId: employe?.id ?? ""
+    });
+
+    return this._http.get<EmployeeDTO[]>(this.baseURL, { headers, params: { all: true } });
+  }
+
   getEmployee(id: string): Observable<EmployeeDetailsDTO> {
     return this._http.get<EmployeeDetailsDTO>(`${this.baseURL}/${id}`);
   }

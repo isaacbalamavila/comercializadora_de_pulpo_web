@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, effect, HostListener, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, HostListener, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitleComponent } from '@base-ui/page-title/page-title.component';
 import { PaginacionComponent } from '@base-ui/paginacion-backend/paginacion.component';
@@ -25,7 +25,7 @@ import { ViewPurchaseDetailsModal } from 'app/components/purchases/modals/view-p
   templateUrl: './purchases.component.html',
   styleUrl: './purchases.component.css'
 })
-export class PurchasesComponent implements OnInit {
+export class PurchasesComponent {
 
   //* Injections
   private readonly _purchaseService = inject(PurchaseService);
@@ -39,18 +39,13 @@ export class PurchasesComponent implements OnInit {
   _isLoading = signal<boolean>(true);
   _error = signal<ErrorResponse | null>(null);
   _currentPage = signal<number>(1);
-  _itemsPerPage: number = 12;
+  _itemsPerPage: number = 11;
 
   //* Filters
   _rawMaterialFilter = signal<number | null>(null);
   _supplierFilter = signal<string | null>(null);
   _dateFilter = signal<string | null>(null);
   _searchFilter = signal<string | null>(null);
-
-  //* Component Init
-  ngOnInit(): void {
-    this._getPurchases();
-  }
 
   //* Host Listener
   @HostListener('window:keydown', ['$event'])

@@ -19,6 +19,10 @@ import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { purchasesGuard as purchasesAccessGuard } from '@guards/purchases.guard';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { SuppliesInventoryComponent } from './pages/supplies-inventory/supplies-inventory.component';
+import { ProcessComponent } from './pages/process/process.component';
+import { CreateProcessComponent } from './pages/create-process/create-process.component';
+import { ProcessRouterComponent } from './pages/process-router/process-router.component';
+import { ProductBatchInventoryComponent } from './pages/product-batch-inventory/product-batch-inventory.component';
 
 
 export const routes: Routes = [
@@ -36,9 +40,19 @@ export const routes: Routes = [
             { path: 'products-catalog', component: ProductsCatalogComponent, canActivate: [productsCatalogAccessGuard] },
             { path: 'purchases', component: PurchasesComponent, canActivate: [purchasesAccessGuard] },
             { path: 'purchase', component: PurchaseComponent },
-            {path: 'inventory', component: InventoryComponent, children:[
-                {path: 'supplies', component: SuppliesInventoryComponent}
-            ]},
+            {
+                path: 'inventory', component: InventoryComponent, children: [
+                    { path: 'supplies', component: SuppliesInventoryComponent },
+                    { path: 'products-batches', component: ProductBatchInventoryComponent }
+                ]
+            },
+            {
+                path: 'freezing-proccess', component: ProcessRouterComponent, children: [
+                    { path: '', component: ProcessComponent },
+                    { path: 'create-process', component: CreateProcessComponent },
+
+                ]
+            },
             { path: '**', component: WorkingOnComponent }
         ]
     }

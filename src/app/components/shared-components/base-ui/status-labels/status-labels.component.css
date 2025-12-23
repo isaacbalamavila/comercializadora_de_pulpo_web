@@ -1,0 +1,18 @@
+span{
+    padding: 0.25rem 1rem;
+    border-radius: 0.5rem;
+    background-color: darkslategray;
+    color: white;
+
+    &.pending{
+        background-color: #E5BE01;
+    }
+
+    &.progress{
+        background-color: var(--primary-color);
+    }
+
+    &.finished{
+        background-color: #008000;
+    }
+}

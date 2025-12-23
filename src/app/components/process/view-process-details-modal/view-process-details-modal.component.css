@@ -1,0 +1,8 @@
+modal {
+  .double {
+    justify-content: start;
+    .info {
+      flex: 1;
+    }
+  }
+}

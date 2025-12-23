@@ -1,0 +1,14 @@
+@switch (status()) {
+  @case (1) {
+    <span class="pending">Pendiente</span>
+  }
+  @case (2) {
+    <span class="progress">En progreso</span>
+  }
+  @case (3) {
+    <span class="finished">Terminado</span>
+  }
+  @default {
+    <span class="unknown">Desconocido</span>
+  }
+}
