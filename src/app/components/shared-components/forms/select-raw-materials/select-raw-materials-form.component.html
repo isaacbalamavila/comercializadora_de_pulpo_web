@@ -1,6 +1,6 @@
 <div class="select-form-container" #roleSelect>
     @if (showLabel()) {
-    <label for="">Materia Prima {{requiredMark() ? '*' : ''}}</label>
+    <label>Materia Prima {{requiredMark() ? '*' : ''}}</label>
     }
     <div class="select" [ngClass]="_isFocus() ? 'input-focused' : ''" tabindex="0">
         <p [ngClass]="_value() ? '': 'placeholder'">{{_label() ?? placeholder()}}</p>

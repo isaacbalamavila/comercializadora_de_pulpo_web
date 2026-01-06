@@ -5,7 +5,7 @@
     </header>
     <div class="filters">
         <product-filter (onSelect)="_productFilter.set($event)" />
-        <user-filter (onSelect)="_userFilter.set($event)" />
+        <user-filter (onSelect)="_userFilter.set($event)" [warehouse]="true"/>
     </div>
     <div class="labels">
         <buttons-filter [value]="_statusFilter" [options]="[

@@ -1,0 +1,55 @@
+<div class="client-filter" #clientFilter>
+    <div class="input-container">
+        <input type="text" [placeholder]="placeholder()" (focus)="_showOptions.set(true); _selectedProduct.set(null)"
+            [(ngModel)]="_search" [ngStyle]="{
+    'background-color': isSearch() ? 'var(--input-background)' : 'white'
+  }">
+        @if ((_selectedProduct() || _search()) && !isSearch()) {
+        <button class="helper-btn" tabindex="-1" (click)="_clear()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 56 56">
+                <path fill="currentColor"
+                    d="M10.023 43.023c-.796.797-.82 2.157 0 2.954c.82.796 2.157.796 2.977 0l15-15l15 15c.797.796 2.156.82 2.977 0c.796-.82.796-2.157 0-2.954L30.953 28l15.024-15c.796-.797.82-2.156 0-2.953c-.844-.82-2.18-.82-2.977 0l-15 15l-15-15c-.82-.82-2.18-.844-2.977 0c-.796.82-.796 2.156 0 2.953l15 15Z" />
+            </svg>
+        </button>
+        }
+        @else {
+        @if (isSearch()) {
+        <button class="helper-btn" tabindex="-1" (click)="_showOptions.set(true)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                <path fill="var(--placeholder-color)"
+                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14" />
+            </svg>
+        </button>
+        }
+        @else {
+        @if (_showOptions()) {
+        <button class="helper-btn" tabindex="-1" (click)="_showOptions.set(false)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M11.293 7.293a1 1 0 0 1 1.32-.083l.094.083l6 6l.083.094l.054.077l.054.096l.017.036l.027.067l.032.108l.01.053l.01.06l.004.057L19 14l-.002.059l-.005.058l-.009.06l-.01.052l-.032.108l-.027.067l-.07.132l-.065.09l-.073.081l-.094.083l-.077.054l-.096.054l-.036.017l-.067.027l-.108.032l-.053.01l-.06.01l-.057.004L18 15H6c-.852 0-1.297-.986-.783-1.623l.076-.084z" />
+            </svg>
+        </button>
+        }
+        @else if(!_showOptions()){
+        <button class="helper-btn" tabindex="-1" (click)="_showOptions.set(true)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M18 9c.852 0 1.297.986.783 1.623l-.076.084l-6 6a1 1 0 0 1-1.32.083l-.094-.083l-6-6l-.083-.094l-.054-.077l-.054-.096l-.017-.036l-.027-.067l-.032-.108l-.01-.053l-.01-.06l-.004-.057v-.118l.005-.058l.009-.06l.01-.052l.032-.108l.027-.067l.07-.132l.065-.09l.073-.081l.094-.083l.077-.054l.096-.054l.036-.017l.067-.027l.108-.032l.053-.01l.06-.01l.057-.004z" />
+            </svg>
+        </button>
+        }
+        }
+        }
+    </div>
+
+    @if (_showOptions()) {
+    <div class="dropdown-list">
+        @for (product of _clientsFiltered(); track $index) {
+        <span class="option" (click)="selectSupplier(product)">{{product.name}}</span>
+        }
+        @empty {
+        <span>Sin resultados :(</span>
+        }
+    </div>
+    }
+</div>

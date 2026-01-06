@@ -1,7 +1,8 @@
-import { Component, computed, ElementRef, HostListener, inject, OnInit, output, signal, ViewChild } from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, input, OnInit, output, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmployeeDTO } from '@interfaces/Employees/EmployeesDTO';
 import { EmployeesService } from '@services/employees.service';
+import { Roles } from 'config/roles';
 
 @Component({
   selector: 'user-filter',
@@ -9,8 +10,8 @@ import { EmployeesService } from '@services/employees.service';
   templateUrl: './user-filter.component.html',
   styleUrl: './user-filter.component.css'
 })
-export class UserFilterComponent implements OnInit{
-  
+export class UserFilterComponent implements OnInit {
+
   //* Injections
   _userService = inject(EmployeesService);
 
@@ -18,16 +19,18 @@ export class UserFilterComponent implements OnInit{
   _search = signal<string | null>(null);
   _showOptions = signal<boolean>(false);
   _selectedUser = signal<EmployeeDTO | null>(null);
+  general = input<boolean>(false);
+  warehouse = input<boolean>(false);
 
   //* Interactions
   onSelect = output<string | null>();
 
   //* Data
   _users = signal<EmployeeDTO[]>([]);
-  _productsFiltered = computed<EmployeeDTO[]>(() => {
-    const suppliers = this._users();
+  _usersFiltered = computed<EmployeeDTO[]>(() => {
+    const users = this._users();
 
-    return suppliers.filter((sp) => {
+    return users.filter((sp) => {
       const searchMatch = this._search()
         ? sp.name.toLowerCase().replaceAll(' ', '').includes(this._search()!.toLowerCase().replaceAll(' ', ''))
         : true;
@@ -56,16 +59,24 @@ export class UserFilterComponent implements OnInit{
     this._getSuppliers()
   }
 
-  //* Get Suppliers
+  //* Get Users
   _getSuppliers(): void {
     this._userService.getAllEmployees().subscribe({
       next: (res) => {
-        this._users.set(res)
+        if (this.general()) {
+          this._users.set(res.filter(us => us.role != Roles.warehouse))
+        }
+        else if (this.warehouse()) {
+          this._users.set(res.filter(us => us.role != Roles.generalEmployee))
+        }
+        else {
+          this._users.set(res)
+        }
       }
     })
   }
 
-  //* Select Supplier
+  //* Select User
   selectSupplier(user: EmployeeDTO): void {
     this._showOptions.set(false);
     this._selectedUser.set(user);

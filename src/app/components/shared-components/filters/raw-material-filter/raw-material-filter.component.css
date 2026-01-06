@@ -39,7 +39,7 @@
     transform: translateY(100%);
     background-color: white;
     border-radius: 0.25rem;
-    box-shadow: var(--modal-shadow);
+    box-shadow: var(--select-options-shadow);
     z-index: 99;
 
     .refresh {

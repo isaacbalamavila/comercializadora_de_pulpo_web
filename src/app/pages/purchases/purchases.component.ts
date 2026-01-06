@@ -6,7 +6,7 @@ import { PaginacionComponent } from '@base-ui/paginacion-backend/paginacion.comp
 import { NoContentComponent } from '@error-handlers/no-content/no-content.component';
 import { PageErrorComponent } from '@error-handlers/page-error/page-error.component';
 import { ErrorResponse } from '@interfaces/ErrorInterface';
-import { PurchasePaginationResposne } from '@interfaces/Purchases/PurchaseDTO';
+import { PurchasesResposne } from '@interfaces/Purchases/PurchaseDTO';
 import { PageLoaderComponent } from '@loaders/page-loader/page-loader.component';
 import { ModalService } from '@services/modal.service';
 import { PurchaseService as PurchaseService } from '@services/purchase.service';
@@ -33,7 +33,7 @@ export class PurchasesComponent {
   private readonly _router = inject(Router)
 
   //* Data Variables
-  _response = signal<PurchasePaginationResposne | null>(null);
+  _response = signal<PurchasesResposne | null>(null);
 
   //* UI Variables
   _isLoading = signal<boolean>(true);
@@ -82,16 +82,17 @@ export class PurchasesComponent {
   //* Get Purchases
   _getPurchases(): void {
     this._isLoading.set(true);
-    this._purchaseService.getPurchases(this._itemsPerPage, this._currentPage(), this._dateFilter(), this._rawMaterialFilter(), this._supplierFilter(), this._searchFilter()).subscribe({
-      next: (res) => {
-        this._response.set(res);
-      },
-      error: (err) => {
-        this._error.set({ statusCode: err.status });
-        this._isLoading.set(false);
-      },
-      complete: () => this._isLoading.set(false)
-    });
+    this._purchaseService.getPurchases(this._itemsPerPage, this._currentPage(), this._dateFilter(),
+      this._rawMaterialFilter(), this._supplierFilter(), this._searchFilter()).subscribe({
+        next: (res) => {
+          this._response.set(res);
+        },
+        error: (err) => {
+          this._error.set({ statusCode: err.status });
+          this._isLoading.set(false);
+        },
+        complete: () => this._isLoading.set(false)
+      });
   }
 
   //* View Purchase Details
@@ -107,6 +108,6 @@ export class PurchasesComponent {
 
   //* Redirect to Make a Purchase
   _makePurchase(): void {
-    this._router.navigate(['home/purchase']);
+    this._router.navigate(['home/purchases/make-purchase']);
   }
 }

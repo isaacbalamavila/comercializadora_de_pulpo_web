@@ -1,0 +1,26 @@
+modal {
+  p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: capitalize;
+  }
+
+  .double {
+    p {
+      flex: 1;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    loading-button {
+      align-self: flex-start;
+      margin-top: 1.2rem;
+      width: 8rem;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.container {
+  .filters {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    gap: 1rem;
+
+    *{
+      flex: 0.2;
+    }
+  }
+}

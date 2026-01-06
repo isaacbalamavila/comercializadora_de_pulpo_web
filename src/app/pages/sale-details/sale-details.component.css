@@ -1,0 +1,80 @@
+.container {
+  header {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+
+    button {
+      background-color: transparent;
+      color: var(--primary-color);
+      padding: 0;
+    }
+
+    .print {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      justify-self: flex-end;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.65rem 1rem;
+      font-size: 1rem
+    }
+  }
+
+  main {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .info {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    h3 {
+      user-select: none;
+    }
+
+    p {
+      text-transform: capitalize;
+      user-select: none;
+
+      b {
+        text-transform: none;
+      }
+    }
+
+    .double {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .total-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem;
+
+      span {
+        font-family: var(--title-font);
+        font-size: 1.2rem;
+        font-weight: 500;
+
+        &.total {
+          font-size: 2rem;
+          font-weight: 650;
+        }
+      }
+    }
+  }
+}
+
+/** Print Configuration */
+
+

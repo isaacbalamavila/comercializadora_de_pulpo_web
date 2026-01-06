@@ -21,6 +21,10 @@ export class ClientsService {
     return this._http.get<ClientDTO[]>(this.baseURL, { params: { 'idExcluded': GENERAL_PUBLIC_CLIENT_ID } });
   }
 
+  getAllClients(): Observable<ClientDTO[]> {
+    return this._http.get<ClientDTO[]>(this.baseURL);
+  }
+
   getClient(id: string): Observable<ClientDetailsDTO> {
     return this._http.get<ClientDetailsDTO>(`${this.baseURL}/${id}`)
   }

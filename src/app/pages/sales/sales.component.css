@@ -1,0 +1,20 @@
+.container {
+  .filters {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    input {
+      background-color: white;
+    }
+
+    * {
+      flex: 0.17;
+    }
+  }
+
+  .labels {
+    display: flex;
+    justify-content: end;
+  }
+}

@@ -82,23 +82,24 @@ export class ProcessComponent {
   //* Get Supplies
   _getProcesses(): void {
     this._isLoading.set(true);
-    this._processService.getProcesses(this._itemsPerPage, this._currentPage(), this._productFilter(), this._userFilter(), this._statusFilter()).subscribe({
-      next: (res) => {
-        this._response.set(res);
-      },
-      error: (err) => {
-        this._error.set({ statusCode: err.status });
-        this._isLoading.set(false);
-      },
-      complete: () => this._isLoading.set(false)
-    });
+    this._processService.getProcesses(this._itemsPerPage, this._currentPage(), this._productFilter(),
+      this._userFilter(), this._statusFilter()).subscribe({
+        next: (res) => {
+          this._response.set(res);
+        },
+        error: (err) => {
+          this._error.set({ statusCode: err.status });
+          this._isLoading.set(false);
+        },
+        complete: () => this._isLoading.set(false)
+      });
   }
 
   //* View Process Details
   _viewProcessDetails(process: ProcessDTO): void {
-    this._modalService.open(ViewProcessDetailsModal, {originalProcess:process}).subscribe({
-      next:(res:ModalRespose<null>)=>{
-        if(res.hasChanges){
+    this._modalService.open(ViewProcessDetailsModal, { originalProcess: process }).subscribe({
+      next: (res: ModalRespose<null>) => {
+        if (res.hasChanges) {
           this._getProcesses();
         }
       }
@@ -106,7 +107,7 @@ export class ProcessComponent {
   }
 
   //* Create Process
-  _createProcess():void{
+  _createProcess(): void {
     console.log('click')
     this._router.navigate(['home/freezing-proccess/create-process']);
   }

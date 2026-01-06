@@ -44,6 +44,11 @@
   color: green;
 }
 
+.notification.warning{
+  border-left: 0.5rem solid #E5BE01;
+  color: #E5BE01;
+}
+
 .progress-bar {
   position: absolute;
   bottom: 0;

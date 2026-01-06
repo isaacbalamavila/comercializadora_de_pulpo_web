@@ -41,7 +41,7 @@ export class SuppliesInventoryService {
 
   updateWeightRemain(supplyId: string, updateWeight: number): Observable<SupplyDTO> {
     return this._http.put<SupplyDTO>(`${this.baseURL}/${supplyId}`, {
-      "updateWeightRemain": updateWeight
+      "updatedRemain": updateWeight
     });
   }
 

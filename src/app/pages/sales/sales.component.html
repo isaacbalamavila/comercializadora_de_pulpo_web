@@ -1,0 +1,51 @@
+<div class="container">
+    <header>
+        <page-title title="Ventas" (onRefresh)="_getSales()" />
+        <add-button label="Realizar Venta" (onAdd)="_reditectToMakeSale()" />
+    </header>
+    <div class="filters">
+        <user-filter [general]="true" (onSelect)="_employeeFilter.set($event)" />
+        <client-filter (onSelect)="_clientFilter.set($event)" />
+        <input type="date" (change)="_onDateChange($event)">
+    </div>
+    <div class="labels">
+        <p>Ventas Totales: <strong>{{_response()?.total ?? 0}}</strong>.</p>
+    </div>
+    <div class="table-container">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if ( (_response()!.sales.length === 0)) {
+        <no-content type="no-content" title="Sin Resultados" details="No se encontraron registros de ventas" />
+        }
+        @else {
+        <table>
+            <thead>
+                <th>Empleado</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Total</th>
+            </thead>
+            <tbody>
+                @for (sale of _response()!.sales; track $index) {
+                <tr (click)="_redirectToDetails(sale.id)">
+                    <td>{{sale.employee}}</td>
+                    <td>{{sale.client}}</td>
+                    <td>{{sale.date | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{sale.date | date: 'hh:mm a'}}</td>
+                    <td>{{sale.total| currency}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+    @if (!_isLoading() && !_error() && _response()!.totalPages > 1) {
+    <paginacion-backend [totalPages]="_response()!.totalPages" [currentPage]="_currentPage()"
+        (pageChange)="_currentPage.set($event)" />
+    }
+</div>

@@ -1,14 +1,13 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, effect, HostListener, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { PageTitleComponent } from '@base-ui/page-title/page-title.component';
 import { PaginacionComponent } from '@base-ui/paginacion-backend/paginacion.component';
-import { SupplyStatusComponent } from '@base-ui/supply-status/supply-status.component';
+import { InventoryStatusComponent } from '@base-ui/supply-status/supply-status.component';
 import { NoContentComponent } from '@error-handlers/no-content/no-content.component';
 import { PageErrorComponent } from '@error-handlers/page-error/page-error.component';
 import { ErrorResponse } from '@interfaces/ErrorInterface';
 import { ModalRespose } from '@interfaces/ModalResponse';
-import { SuppliesPaginationResponseDTO, SupplyDTO } from '@interfaces/Supplies Inventory/SupplyDTO';
+import { SuppliesPaginationResponseDTO as SuppliesResponseDTO, SupplyDTO } from '@interfaces/Supplies Inventory/SupplyDTO';
 import { PageLoaderComponent } from '@loaders/page-loader/page-loader.component';
 import { ModalService } from '@services/modal.service';
 import { SuppliesInventoryService } from '@services/supplies-inventory.service';
@@ -20,7 +19,7 @@ import { ViewSupplyDetailsModalComponent as ViewSupplyDetailsModal } from 'app/c
 @Component({
   selector: 'app-supplies-inventory',
   imports: [PageTitleComponent, SearchComponent, RawMaterialFilterComponent, ButtonsFilterComponent, PageLoaderComponent, PageErrorComponent
-    , NoContentComponent, DatePipe, SupplyStatusComponent, CommonModule, PaginacionComponent],
+    , NoContentComponent, DatePipe, InventoryStatusComponent, CommonModule, PaginacionComponent],
   templateUrl: './supplies-inventory.component.html',
   styleUrl: './supplies-inventory.component.css'
 })
@@ -29,10 +28,9 @@ export class SuppliesInventoryComponent {
   //* Injections
   private readonly _suppliesService = inject(SuppliesInventoryService);
   private readonly _modalService = inject(ModalService);
-  private readonly _router = inject(Router);
 
   //* Data Variables
-  _response = signal<SuppliesPaginationResponseDTO | null>(null);
+  _response = signal<SuppliesResponseDTO | null>(null);
 
   //* UI Variables
   _isLoading = signal<boolean>(true);
@@ -79,16 +77,17 @@ export class SuppliesInventoryComponent {
   //* Get Supplies
   _getSupplies(): void {
     this._isLoading.set(true);
-    this._suppliesService.getSupplies(this._itemsPerPage, this._currentPage(), this._availablesFilter(), this._rawMaterialFilter(), this._searchFilter()).subscribe({
-      next: (res) => {
-        this._response.set(res);
-      },
-      error: (err) => {
-        this._error.set({ statusCode: err.status });
-        this._isLoading.set(false);
-      },
-      complete: () => this._isLoading.set(false)
-    });
+    this._suppliesService.getSupplies(this._itemsPerPage, this._currentPage(), this._availablesFilter(),
+      this._rawMaterialFilter(), this._searchFilter()).subscribe({
+        next: (res) => {
+          this._response.set(res);
+        },
+        error: (err) => {
+          this._error.set({ statusCode: err.status });
+          this._isLoading.set(false);
+        },
+        complete: () => this._isLoading.set(false)
+      });
   }
 
   //* View Supply Details
@@ -96,7 +95,6 @@ export class SuppliesInventoryComponent {
     this._modalService.open(ViewSupplyDetailsModal, { originalSupply: supply })
       .subscribe({
         next: (res: ModalRespose<number>) => {
-          console.log(res.hasChanges)
           if (!res.hasChanges || res.data == null) return;
           const newWeight = res.data;
 
@@ -114,11 +112,6 @@ export class SuppliesInventoryComponent {
           });
         }
       });
-  }
-
-  //* Go to the product batches inventory
-  _redirectToProductBatches():void{
-    this._router.navigate(['home/inventory/products-batches']);
   }
 
 }

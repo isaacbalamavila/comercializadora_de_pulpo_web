@@ -1,0 +1,146 @@
+<div class="container">
+    <header>
+        <h1>Realizar Venta</h1>
+        <user-info />
+    </header>
+    <main>
+        <div class="client-payment-section">
+            <div class="client-details">
+                <h3>Información del Cliente</h3>
+                <client-filter [isSearch]="true" [onlyActives]="true" (onSelect)="_clientFilter.set($event)" />
+                <hr>
+                @if (_clientSelected()) {
+                <div class="client-label">
+                    <div class="circle">
+                        <span>{{_clientLabel()}}</span>
+                    </div>
+                    <p class="semi-bold">{{_clientSelected()!.name}}</p>
+                </div>
+                <hr>
+                <div class="info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z" />
+                    </svg>
+                    <p>{{_clientSelected()!.email}}</p>
+                </div>
+                <div class="info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z" />
+                    </svg>
+                    <p>{{_phoneFormat()}}</p>
+                </div>
+                <div class="info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M32 416a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V222H32Zm66-138a8 8 0 0 1 8-8h92a8 8 0 0 1 8 8v64a8 8 0 0 1-8 8h-92a8 8 0 0 1-8-8ZM464 80H48a16 16 0 0 0-16 16v66h448V96a16 16 0 0 0-16-16" />
+                    </svg>
+                    <p>{{_clientSelected()?.rfc ?? 'No agregado'}}.</p>
+                </div>
+                <div class="info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                        <g fill="none">
+                            <path fill="currentColor"
+                                d="M2 9c0-1.886 0-2.828.586-3.414S4.114 5 6 5h12c1.886 0 2.828 0 3.414.586S22 7.114 22 9c0 .471 0 .707-.146.854C21.707 10 21.47 10 21 10H3c-.471 0-.707 0-.854-.146C2 9.707 2 9.47 2 9m0 9c0 1.886 0 2.828.586 3.414S4.114 22 6 22h12c1.886 0 2.828 0 3.414-.586S22 19.886 22 18v-5c0-.471 0-.707-.146-.854C21.707 12 21.47 12 21 12H3c-.471 0-.707 0-.854.146C2 12.293 2 12.53 2 13z" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 3v3m10-3v3" />
+                        </g>
+                    </svg>
+                    <p><b>Cliente desde: </b>{{_clientSelected()!.createdAt|date: 'dd-MM-yyyy'}}.</p>
+                </div>
+                }
+            </div>
+            @if (_clientSelected()) {
+            <div class="payment-details">
+                <h3>Información de Pago</h3>
+                <payment-method-select #paymentInput (onSelect)="_paymentMethod.set($event)" />
+            </div>
+            }
+        </div>
+        <div class="sale-details-container">
+            <div class="sale-details">
+                <h3>Detalles de la compra </h3>
+                <div class="select-product">
+                    <product-sale-input #productSelectInput (onSelect)="_onSelectProduct($event)" />
+                    <stock-input #stockInput [max]="_maxPieces()" (onValueSelect)="_quantity.set($event)" />
+                    <button
+                        [disabled]="!_productSelected() ||!_quantity() ||_quantity()! > _productSelected()!.quantity "
+                        (click)="_addProductToCart()">
+                        Añadir
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                        </svg>
+                    </button>
+                </div>
+                @if (_selectedProducts().length !== 0) {
+                <div class="selected-container" [@fadeInOut]>
+                    <span>{{_selectedProducts().length}} Seleccionados</span>
+                    <button (click)="_deleteSelectedProducts()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zM8 9h8v10H8zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" />
+                        </svg>
+                        Eliminar
+                    </button>
+                </div>
+                }
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <td></td>
+                            <th>SKU</th>
+                            <th>Producto</th>
+                            <th>Precio Unitario</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </thead>
+                        <tbody>
+                            @for (product of _productsCart(); track product.sku) {
+                            <tr>
+                                <td><custom-checkbox (onCheked)="_onSelected($event, product)" /></td>
+                                <td>{{product.sku}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.price|currency}}</td>
+                                <td>{{product.quantity}}</td>
+                                <td>{{product.subtotal|currency}}</td>
+                            </tr>
+                            }
+                            @empty {
+                            <tr style="background-color: #f0f1f2;">
+                                <td colspan="6">
+                                    <div class="empty">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem"
+                                            viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                d="M12 2a9 9 0 0 1 9 9v7.5a3.5 3.5 0 0 1-6.39 1.976a2.999 2.999 0 0 1-5.223 0a3.5 3.5 0 0 1-6.382-1.783L3 18.499V11a9 9 0 0 1 9-9m0 10c-1.105 0-2 1.12-2 2.5s.895 2.5 2 2.5s2-1.12 2-2.5s-.895-2.5-2-2.5M9.5 8a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3m5 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3" />
+                                        </svg>
+                                        <p>Sin Articulos</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount">{{_total()|currency}}</span>
+                </div>
+            </div>
+            <div class="total-btn-container">
+                <button class="total-btn" [disabled]="!_validSale() || _isLoading()" (click)="_makeSale()">
+                    @if(!_isLoading()){
+                    Finalizar Venta
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.36 2.45c-.15.28-.24.61-.24.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25q0-.075.03-.12L8.1 13h7.45c.75 0 1.41-.42 1.75-1.03l3.58-6.47c.07-.16.12-.33.12-.5a1 1 0 0 0-1-1H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2" />
+                    </svg>
+                    }
+                    @else{
+                    <small-loader />
+                    }
+                </button>
+            </div>
+        </div>
+    </main>
+</div>

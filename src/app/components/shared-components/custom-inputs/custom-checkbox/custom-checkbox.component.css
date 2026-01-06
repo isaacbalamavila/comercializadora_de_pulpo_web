@@ -1,0 +1,19 @@
+.checked-container {
+  position: relative;
+  width: 1rem;
+  aspect-ratio: 1/1;
+  outline: var(--primary-color) 2px solid;
+  border-radius: 0.25rem;
+
+  &.isChecked{
+    background-color: var(--primary-color);
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+}

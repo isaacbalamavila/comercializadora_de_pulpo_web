@@ -23,6 +23,11 @@ import { ProcessComponent } from './pages/process/process.component';
 import { CreateProcessComponent } from './pages/create-process/create-process.component';
 import { ProcessRouterComponent } from './pages/process-router/process-router.component';
 import { ProductBatchInventoryComponent } from './pages/product-batch-inventory/product-batch-inventory.component';
+import { ProductInventoryComponent } from './pages/product-inventory/product-inventory.component';
+import { inventoryGuard } from '@guards/inventory.guard';
+import { SalesComponent } from './pages/sales/sales.component';
+import { SaleDetailsComponent } from './pages/sale-details/sale-details.component';
+import { SaleComponent } from './pages/sale/sale.component';
 
 
 export const routes: Routes = [
@@ -38,12 +43,19 @@ export const routes: Routes = [
             { path: 'clients', component: ClientsComponent },
             { path: 'products', component: ProductsComponent, canActivate: [productsAccessGuard] },
             { path: 'products-catalog', component: ProductsCatalogComponent, canActivate: [productsCatalogAccessGuard] },
-            { path: 'purchases', component: PurchasesComponent, canActivate: [purchasesAccessGuard] },
+            {
+                path: 'purchases', canActivate: [purchasesAccessGuard],
+                children: [
+                    { path: '', component: PurchasesComponent },
+                    { path: 'make-purchase', component: PurchaseComponent }
+                ]
+            },
             { path: 'purchase', component: PurchaseComponent },
             {
                 path: 'inventory', component: InventoryComponent, children: [
-                    { path: 'supplies', component: SuppliesInventoryComponent },
-                    { path: 'products-batches', component: ProductBatchInventoryComponent }
+                    { path: '', component: ProductInventoryComponent },
+                    { path: 'supplies', component: SuppliesInventoryComponent, canActivate: [inventoryGuard] },
+                    { path: 'products', component: ProductBatchInventoryComponent, canActivate: [inventoryGuard] }
                 ]
             },
             {
@@ -53,7 +65,15 @@ export const routes: Routes = [
 
                 ]
             },
-            { path: '**', component: WorkingOnComponent }
+            {
+                path: 'sales', children: [
+                    { path: '', component: SalesComponent },
+                    { path: 'make-sale', component: SaleComponent },
+                    { path: ':id', component: SaleDetailsComponent },
+                ]
+            },
+            { path: 'sale', component: SaleComponent },
+            { path: '**', component: WorkingOnComponent },
         ]
     }
 ];

@@ -29,9 +29,9 @@ export class ProductFilterComponent implements OnInit {
   //* Data
   _products = signal<ProductDTO[]>([]);
   _productsFiltered = computed<ProductDTO[]>(() => {
-    const suppliers = this._products();
+    const products = this._products();
 
-    return suppliers.filter((sp) => {
+    return products.filter((sp) => {
       const searchMatch = this._search()
         ? sp.name.toLowerCase().replaceAll(' ', '').includes(this._search()!.toLowerCase().replaceAll(' ', ''))
         : true;
@@ -58,25 +58,27 @@ export class ProductFilterComponent implements OnInit {
   //* Component Init
   ngOnInit(): void {
     this.onlyActives()
-      ? this._getActiveSuppliers()
+      ? this._getActiveProducts()
       : this._getProducts()
   }
 
-  //* Get Suppliers
+  //* Get Product
   _getProducts(): void {
     this._productService.getProducts().subscribe({
       next: (res) => this._products.set(res)
     })
   }
 
-  //* Get Suppliers
-  _getActiveSuppliers(): void {
+  //* Get Product
+  _getActiveProducts(): void {
     this._productService.getActiveProducts().subscribe({
       next: (res) => this._products.set(res)
     })
   }
 
-  //* Select Supplier
+  
+
+  //* Select Product
   selectSupplier(product: ProductDTO): void {
     this._showOptions.set(false);
     this._selectedProduct.set(product);

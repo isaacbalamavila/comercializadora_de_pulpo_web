@@ -65,7 +65,7 @@ export class EmployeesComponent implements OnInit {
         || emp.phone?.includes(search)
         : true;
 
-      const statusMatch = status !== null
+      const statusMatch = status != null
         ? emp.isDeleted === status
         : true;
 

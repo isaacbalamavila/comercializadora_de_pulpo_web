@@ -1,0 +1,45 @@
+<modal [width]="50" [height]="80" (onClose)="_onClose()">
+    @if (_isLoading()) {
+    <page-loader />
+    }
+    @else if (_error()) {
+    <page-error [statusCode]="_error()!.statusCode" />
+    }
+    @else {
+    <header>
+        <h2>{{_productBatchDetails()!.sku}}</h2>
+        <copy-button [value]="_productBatchDetails()!.sku" [size]="1.25" />
+    </header>
+
+    <h4>Información del Lote:</h4>
+    <p><b>Identificador del Lote: </b>{{_productBatchDetails()!.id}}. <copy-button
+            [value]="_productBatchDetails()!.id" /></p>
+    <p><b>Identificador del Proceso: </b>{{_productBatchDetails()!.processId}}. <copy-button
+            [value]="_productBatchDetails()!.processId" /></p>
+    <p><b>Empleado Encargado del Proceso: </b>{{_productBatchDetails()!.userName}}.</p>
+    <div class="double">
+        <p><b>Fecha de Creación: </b>{{_productBatchDetails()!.creationDate|date:'dd /MM/yyyy'}}.</p>
+        <p><b>Fecha de Caducidad: </b>{{_productBatchDetails()!.expirationDate|date:'dd /MM/yyyy'}}.</p>
+    </div>
+    <p><b>Unidades Originales del Lote: </b>{{_productBatchDetails()!.quantity}} PZ.</p>
+    <hr>
+    <h4>Información del Producto ({{_productBatchDetails()!.product.sku}}):</h4>
+    <p><b>Nombre: </b>{{_productBatchDetails()!.product.name}}.</p>
+    <div class="double">
+        <p><b>Contenido: </b>{{_productBatchDetails()!.product.content}} {{_productBatchDetails()!.product.unit}}.</p>
+        <p><b>Precio: </b>{{_productBatchDetails()!.product.price|currency}}</p>
+    </div>
+    <h4>Editar Cantidad Disponible</h4>
+    <form [formGroup]="_updateRemainForm">
+        <input-number-form label="Piezas Disponibles:" name="Piezas" formControlName="amount"
+            [max]="_productBatchDetails()!.quantityRemain" />
+        <loading-button
+            [disabled]="_updateRemainForm.invalid || this._updateRemainForm.get('amount')!.value == _productBatchDetails()!.quantityRemain ||_productBatchDetails()!.quantityRemain === 0"
+            label="Guardar" [isLoading]="_updateLoading()" (onClick)="_updateProductBatchRemain()"/>
+    </form>
+    <hr>
+    <loading-button [disabled]=" _productBatchDetails()!.quantityRemain === 0" label="Dar de Baja" btnStyle="delete"
+        [isLoading]="_disposeLoading()" (onClick)="_disposeBatch()"/>
+    }
+
+</modal>

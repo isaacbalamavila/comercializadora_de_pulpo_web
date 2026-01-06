@@ -1,0 +1,62 @@
+<div class="container">
+    <header>
+        <page-title title="Inventario de Productos" (onRefresh)="_getInventory()" />
+    </header>
+    <div class="filters">
+        <search-filter [value]="_searchFilter" />
+    </div>
+    <div class="labels">
+        <buttons-filter [value]="_statusFilter" [options]="[
+            {label: 'Disponibles',value: true},
+            {label: 'Por Agotarse', value: false}]" />
+    </div>
+    <div class="table-container">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_products().length === 0) {
+        <no-content type="no-content" title="Sin Resultados" details="No se encontraron registros de productos" />
+        }
+        @else if (_filteredProducts().length === 0) {
+        <no-content type="no-content" title="Sin Resultados"
+            details="No se encontraron productos que coincidan con los filtros" />
+        }
+        @else {
+        <table>
+            <thead>
+                <th>SKU</th>
+                <th>Nombre</th>
+                <th>Materia Prima</th>
+                <th>Contenido</th>
+                <th>Stock Actual</th>
+                <th>Stock Mínimo</th>
+                <th>Estado</th>
+            </thead>
+            <tbody>
+                @for (product of _filteredProducts()|paginate: {
+                currentPage : _currentPage(),
+                itemsPerPage: _itemsPerPage(),
+                totalItems: _filteredProducts().length
+                }; track $index) {
+                <tr>
+                    <td>{{product.sku}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.rawMaterial}}</td>
+                    <td>{{product.content}} {{product.unit}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.stockMin}}</td>
+                    <td><span [ngClass]="{'warning': product.quantity <= product.stockMin}">{{product.quantity
+                            > product.stockMin ? 'Disponible': 'Por Agotarse'}}</span></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+    @if (_filteredProducts().length > _itemsPerPage()) {
+    <pagination (pageChange)="_currentPage.set($event)" />
+    }
+</div>

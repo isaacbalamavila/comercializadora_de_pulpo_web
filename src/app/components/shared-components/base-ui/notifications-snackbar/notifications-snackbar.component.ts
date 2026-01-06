@@ -9,8 +9,8 @@ import { Component, Input } from '@angular/core';
 })
 export class NotificationsSnackbarComponent {
 
-  @Input() type: 'success' | 'error' | 'info' = 'info';
-  @Input() title:string = '';
-  @Input() message: string = '';
-  @Input({required: true}) duration!: number;
+  type: 'success' | 'error' | 'info' | 'warning' = 'info';
+  title: string = '';
+  message: string = '';
+  duration!: number;
 }

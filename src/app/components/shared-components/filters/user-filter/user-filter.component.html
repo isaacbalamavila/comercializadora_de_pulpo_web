@@ -33,7 +33,7 @@
 
     @if (_showOptions()) {
     <div class="dropdown-list">
-        @for (user of _productsFiltered(); track $index) {
+        @for (user of _usersFiltered(); track $index) {
         <span class="option" (click)="selectSupplier(user)">{{user.name}} {{user.lastName}}</span>
         }
         @empty {

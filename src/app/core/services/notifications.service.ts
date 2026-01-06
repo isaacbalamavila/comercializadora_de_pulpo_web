@@ -20,7 +20,7 @@ export class NotificationService {
 
 
   private showNotification(
-    type: 'success' | 'error' | 'info',
+    type: 'success' | 'error' | 'info' | 'warning',
     title: string,
     message: string,
 
@@ -71,6 +71,10 @@ export class NotificationService {
 
   info(title: string, message: string, duration?: number) {
     this.showNotification('info', title, message, duration);
+  }
+
+  warning(title: string, message: string, duration?: number) {
+    this.showNotification('warning', title, message, duration);
   }
 
 

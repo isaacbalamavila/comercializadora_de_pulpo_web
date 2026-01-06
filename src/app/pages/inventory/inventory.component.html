@@ -1,3 +1,10 @@
 <div class="main-inventory">
-    <router-outlet/>
+    @if (_isAdmin()) {
+    <div class="tabs">
+        <a routerLink="/home/inventory" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Productos</a>
+        <a routerLink="/home/inventory/products" routerLinkActive="active">Productos por Lotes</a>
+        <a routerLink="/home/inventory/supplies" routerLinkActive="active">Insumos</a>
+    </div>
+    }
+    <router-outlet />
 </div>

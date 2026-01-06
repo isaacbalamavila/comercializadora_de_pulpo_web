@@ -14,18 +14,4 @@
     display: flex;
     justify-content: end;
   }
-
-  .table-container {
-    position: relative;
-    flex: 1;
-    min-width: 0;
-
-    table {
-      flex: 1;
-      tr {
-        cursor: pointer;
-        user-select: none;
-      }
-    }
-  }
 }

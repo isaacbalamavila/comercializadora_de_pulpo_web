@@ -19,6 +19,6 @@ export interface PurchaseDetailsDTO extends PurchaseDTO {
     rawMaterialDescription: string;
 }
 
-export interface PurchasePaginationResposne extends PaginationResponse{
+export interface PurchasesResposne extends PaginationResponse{
     purchases: PurchaseDTO[];
 }

@@ -36,7 +36,7 @@
     max-height: 15rem;
     overflow-y: auto;
     background-color: white;
-    box-shadow: var(--modal-shadow);
+    box-shadow: var(--select-options-shadow);
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;

@@ -1,12 +1,12 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'supply-status',
+  selector: 'inventory-status',
   imports: [],
   templateUrl: './supply-status.component.html',
   styleUrl: './supply-status.component.css'
 })
-export class SupplyStatusComponent {
+export class InventoryStatusComponent {
   //* Input
-  weight = input.required<number>()
+  remain = input.required<number>()
 }

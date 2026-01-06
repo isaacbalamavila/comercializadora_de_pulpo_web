@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { CreatePurchaseDTO, CreatePurchaseRequest } from '@interfaces/Purchases/CreatePurchaseDTO';
-import { PurchaseDetailsDTO, PurchaseDTO, PurchasePaginationResposne } from '@interfaces/Purchases/PurchaseDTO';
+import { PurchaseDetailsDTO, PurchaseDTO, PurchasesResposne } from '@interfaces/Purchases/PurchaseDTO';
 import { environment } from 'enviroment/enviroment';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -25,7 +25,7 @@ export class PurchaseService {
     rawMaterial: number | null,
     supplier: string | null,
     search: string | null
-  ): Observable<PurchasePaginationResposne> {
+  ): Observable<PurchasesResposne> {
 
     let params: any = {};
 
@@ -36,7 +36,7 @@ export class PurchaseService {
     if (supplier != null && supplier.trim() !== '') params.supplier = supplier;
     if (search != null && search.trim() !== '') params.search = search;
 
-    return this._http.get<PurchasePaginationResposne>(this.baseURL, { params });
+    return this._http.get<PurchasesResposne>(this.baseURL, { params });
   }
 
   getPurchaseDetails(id: string): Observable<PurchaseDetailsDTO> {

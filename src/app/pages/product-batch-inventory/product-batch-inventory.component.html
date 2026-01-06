@@ -1,1 +1,61 @@
-<p>product-batch-inventory works!</p>
+<div class="container">
+    <header>
+        <page-title title="Inventario de Productos (Lotes)" (onRefresh)="_getProductInventory()" />
+    </header>
+    <div class="filters">
+        <search-filter [value]="_searchFilter" placeholder="Buscar (SKU)"/>
+        <product-filter (onSelect)="_productFilter.set($event)"/>
+    </div>
+    <div class="labels">
+        <buttons-filter [value]="_availablesFilter" [options]="[
+            {label: 'Disponibles', value: true},
+            {label: 'Agotados', value: false}
+        ]" />
+    </div>
+
+    <div class="table-container">
+        @if (_isLoading()) {
+        <page-loader />
+        }
+        @else if (_error()) {
+        <page-error [statusCode]="_error()!.statusCode" />
+        }
+        @else if (_response()!.productbatches.length === 0) {
+        <no-content type="no-content" title="Sin Resultados" details="No se encontraron registros de lotes" />
+        }
+        @else{
+        <table>
+            <thead>
+                <th>SKU</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Contenido</th>
+                <th>Fecha de Caducidad</th>
+                <th>Piezas Disponibles</th>
+                <th>Estado</th>
+            </thead>
+            <tbody>
+                @for (product of _response()!.productbatches; track $index) {
+                <tr (click)="_viewProductBatchDetails(product)">
+                    <td>{{product.sku}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price | currency}}</td>
+                    <td>{{product.content}} {{product.unit}}</td>
+                    <td>{{product.expirationDate|date: 'dd/MM/yyyy'}}</td>
+                    <td>{{product.quantityRemain}}</td>
+                    <td>
+                        <inventory-status [remain]="product.quantityRemain" />
+                    </td>
+                </tr>
+                }
+
+
+            </tbody>
+        </table>
+        }
+    </div>
+    @if (!_isLoading() && !_error() && _response()!.totalPages > 1) {
+    <paginacion-backend [totalPages]="_response()!.totalPages" [currentPage]="_currentPage()"
+        (pageChange)="_currentPage.set($event)" />
+    }
+</div>

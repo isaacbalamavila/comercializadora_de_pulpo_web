@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, HostListener, input, output } from '@angular/core';
 import { popupAnimation } from '@animations';
 
 @Component({
@@ -6,7 +6,7 @@ import { popupAnimation } from '@animations';
   imports: [],
   templateUrl: './base-modal.component.html',
   styleUrl: './base-modal.component.css',
-  animations:[popupAnimation]
+  animations: [popupAnimation]
 })
 export class BaseModalComponent {
 
@@ -17,6 +17,13 @@ export class BaseModalComponent {
 
   //* Outputs 
   onClose = output<void>()
+
+  //* ESC Handler
+  @HostListener('window:keydown.escape', ['$event']) // <--- Filtro directo
+  handleKeyDown(event: Event) {
+    (event as KeyboardEvent).preventDefault();
+    this._close();
+  }
 
   //* Close
   _close(): void {

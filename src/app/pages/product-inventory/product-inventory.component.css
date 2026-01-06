@@ -1,0 +1,21 @@
+.container {
+  .filters {
+    display: flex;
+    justify-content: flex-end;
+
+    search-filter {
+      flex: 0.2;
+    }
+  }
+}
+
+span {
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+
+  &.warning {
+    background-color: #e5be01;
+  }
+}

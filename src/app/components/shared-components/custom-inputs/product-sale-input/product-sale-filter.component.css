@@ -1,0 +1,38 @@
+.input-container {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .dropdown-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 999;
+    max-height: 15rem;
+    overflow-y: auto;
+    background-color: white;
+    gap: 0.25rem;
+    bottom: -0.5rem;
+    transform: translateY(100%);
+    box-shadow: var(--select-options-shadow);
+    border-radius: 0.5rem;
+    user-select: none;
+
+    span {
+      padding: 0.5rem;
+      text-transform: capitalize;
+      border-radius: 0.25rem;
+
+      &:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+    }
+  }
+}

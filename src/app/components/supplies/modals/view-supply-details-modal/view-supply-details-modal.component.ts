@@ -47,7 +47,7 @@ export class ViewSupplyDetailsModalComponent implements OnInit {
     return original.weightRemainKg !== current!.weightRemainKg;
   });
 
-  //*On Init
+  //*On Component Init
   ngOnInit(): void {
     this._getSupplyDetails();
   }
@@ -95,7 +95,7 @@ export class ViewSupplyDetailsModalComponent implements OnInit {
       next: () => {
         this._supply.update((sp) => ({ ...sp!, weightRemainKg: value }));
         this._notificationService.success(
-          'Kilos disponibles actulizados',
+          'Kilos disponibles actualizados',
           `Se actualizaron correctamente los kilos disponibles del lote '${this.originalSupply.sku}'".`
         );
       },
@@ -112,7 +112,7 @@ export class ViewSupplyDetailsModalComponent implements OnInit {
     });
   }
 
-  //* Update Weight
+  //* Dispose Weight
   _disposeSupply(): void {
     this._disposeLoading.set(true);
     this._modalService.open(ConfirmDialogComponent, {
@@ -125,8 +125,8 @@ export class ViewSupplyDetailsModalComponent implements OnInit {
       next: () => {
         this._supply.update((sp) => ({ ...sp!, weightRemainKg: 0 }));
         this._notificationService.success(
-          'Kilos disponibles actulizados',
-          `Se actualizaron correctamente los kilos disponibles del lote '${this.originalSupply.sku}'".`
+          'Baja Exitosa',
+          `Se dio de baja correctamente el lote '${this.originalSupply.sku}'".`
         );
         this._updateWeightForm.reset();
       },
@@ -142,7 +142,6 @@ export class ViewSupplyDetailsModalComponent implements OnInit {
       complete: () => this._disposeLoading.set(false)
     });
   }
-
 
   //* Close
   _close() {
