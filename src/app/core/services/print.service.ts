@@ -17,7 +17,7 @@ export class PrintService {
 
   saleTicket(sale: SaleDetailsDTO): void {
 
-    const fileName = `venta_${sale.client.replaceAll(' ', '_')}-${this.datePipe.transform(sale.saleDate, 'dd-MM-yyyy')}`
+    const fileName = `venta_${sale.client.replaceAll(' ', '_')}-${this.datePipe.transform(sale.date, 'dd-MM-yyyy')}`
 
     const docDefinition = {
       pageSize: { width: 216, height: 360 },
@@ -52,7 +52,7 @@ export class PrintService {
         {
           text: [
             { text: 'Fecha de venta: ', bold: true },
-            `${this.datePipe.transform(sale.saleDate, 'dd/MM/YYYY hh:mm a')}.`,
+            `${this.datePipe.transform(sale.date, 'dd/MM/YYYY hh:mm a')}.`,
           ],
           fontSize: 8,
           margin: [0, 1]

@@ -8,6 +8,7 @@ interface SaleDTO {
     id: string;
     employee: string;
     client: string;
+    paymentMethod: string;
     date: string;
     total: number;
 }
@@ -18,7 +19,7 @@ export interface SaleDetailsDTO {
     client: string;
     clientRfc: string | null;
     paymentMethod: string;
-    saleDate: string;
+    date: string;
     products: SaleItem[];
     total: number;
 }

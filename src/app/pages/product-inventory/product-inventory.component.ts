@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, HostListener, inject, OnInit, signal } from '@angular/core';
 import { PageTitleComponent } from '@base-ui/page-title/page-title.component';
 import { PageErrorComponent } from '@error-handlers/page-error/page-error.component';
 import { ErrorResponse } from '@interfaces/ErrorInterface';
@@ -63,6 +63,15 @@ export class ProductInventoryComponent implements OnInit {
       this._statusFilter();
       this._currentPage.set(1);
     });
+  }
+
+  //* Host Listener
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key.toLowerCase() === 'r') {
+      event.preventDefault();
+      this._getInventory();
+    }
   }
 
   //* Component Init
