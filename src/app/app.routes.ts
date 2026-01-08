@@ -28,6 +28,7 @@ import { inventoryGuard } from '@guards/inventory.guard';
 import { SalesComponent } from './pages/sales/sales.component';
 import { SaleDetailsComponent } from './pages/sale-details/sale-details.component';
 import { SaleComponent } from './pages/sale/sale.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 
 export const routes: Routes = [
@@ -73,6 +74,7 @@ export const routes: Routes = [
                 ]
             },
             { path: 'sale', component: SaleComponent },
+            { path: 'reports', component: ReportsComponent },
             { path: '**', component: WorkingOnComponent },
         ]
     }

@@ -1,0 +1,35 @@
+.toggle-btn {
+  position: relative;
+  min-width: 1.5rem;
+  min-height: 0.7rem;
+  outline: var(--primary-color) solid 1px;
+  border-radius: 1rem;
+
+  .circle {
+    position: absolute;
+    top: 50%;
+    min-height: 1.2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+}
+
+.inactive {
+  .circle {
+    left: 0;
+    transform: translate(-25%, -50%);
+    transition: transform 0.3s ease-out, color 0.3s linear;
+  }
+}
+
+.active {
+  background-color: var(--primary-color);
+  .circle {
+    right: 0;
+    color: white;
+    border: var(--primary-color) solid 2px;
+    transform: translate(25%, -50%);
+    transition: transform 0.3s ease-out, color 0.3s linear;
+  }
+}

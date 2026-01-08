@@ -1,0 +1,47 @@
+<modal [width]="40" [height]="52" (onClose)="_close()">
+    <div class="content">
+        <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" viewBox="0 0 24 24">
+            <path fill="currentColor" fill-rule="evenodd"
+                d="M8.38 7.194a5.41 5.41 0 0 1 9.952 2.605q.095-.004.191-.004a4.478 4.478 0 0 1 0 8.955H6.875A5.875 5.875 0 1 1 8.38 7.194M12 15.75c.18 0 .345-.063.475-.17l2.494-1.994a.75.75 0 0 0-.938-1.172L12.75 13.44V10a.75.75 0 0 0-1.5 0v3.44l-1.282-1.025a.75.75 0 1 0-.937 1.172l2.498 1.998a.75.75 0 0 0 .465.166z"
+                clip-rule="evenodd" />
+        </svg>
+        <h2>Descargar Reporte de Productos</h2>
+        <div class="label">
+            <h4>Selecciona el Periodo:</h4>
+            <div class="option">
+                <span>
+                    Personalizado
+                </span>
+                <toggle-button (change)="_customPeriod.set($event)" />
+            </div>
+        </div>
+        @if (_customPeriod()) {
+        <p>Seleccione el rango de fechas para procesar el reporte. Ambos campos son obligatorios.</p>
+        <div class="double">
+            <label>
+                Fecha Inicial*
+                <input type="date" name="_startDate" [(ngModel)]="_startDate">
+            </label>
+            <label>
+                Fecha Final*
+                <input type="date" name="endDate" [(ngModel)]="_endDate">
+            </label>
+        </div>
+        <loading-button label="Descargar" [isLoading]="_customLoading()" (onClick)="_customReport()"
+            [disabled]="!_startDate() || !_endDate() || _customLoading()" />
+
+        }
+        @else{
+
+        <p>Selecciona un periodo para generar tu informe. El reporte incluirá de forma automática todas las
+            transacciones acumuladas desde el inicio del ciclo actual.</p>
+        <div class="double">
+            <loading-button label="Semana Actual" [isLoading]="_weekLoading()" (onClick)="_weekReport()"
+                [disabled]="_weekLoading() || _monthLoading()" />
+            <loading-button label="Mes Actual" [isLoading]="_monthLoading()" (onClick)="_monthReport()"
+                [disabled]="_monthLoading() || _weekLoading()" />
+        </div>
+        }
+    </div>
+
+</modal>

@@ -1,1 +1,44 @@
-<p>reports works!</p>
+<div class="container">
+    <header>
+        <h1>Centro de Reportes</h1>
+    </header>
+    <p>Haz clic en una categoría para configurar y descargar tu documento.</p>
+    <main>
+        <div class="report-card" (click)="_saleReport()">
+            <h4>Reporte de Ventas</h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M2 17h20v4H2zM6.25 7H9V6H6V3h8v3h-3v1h6.8c1 0 2 1 2.2 2l.5 7h-17l.55-7c0-1 1-2 2.2-2M13 9v2h5V9zM6 9v1h2V9zm3 0v1h2V9zm-3 2v1h2v-1zm3 0v1h2v-1zm-3 2v1h2v-1zm3 0v1h2v-1zM7 4v1h6V4z" />
+            </svg>
+        </div>
+        <div class="report-card" (click)="_purchaseReport()">
+            <h4>Reporte de Compras</h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" viewBox="0 0 24 24">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M12.052 1.25h-.104c-.899 0-1.648 0-2.242.08c-.628.084-1.195.27-1.65.725c-.456.456-.642 1.023-.726 1.65c-.057.427-.074 1.446-.078 2.32c-2.022.067-3.237.303-4.08 1.147C2 8.343 2 10.229 2 14s0 5.657 1.172 6.828S6.229 22 10 22h4c3.771 0 5.657 0 6.828-1.172S22 17.771 22 14s0-5.657-1.172-6.828c-.843-.844-2.058-1.08-4.08-1.146c-.004-.875-.02-1.894-.078-2.32c-.084-.628-.27-1.195-.726-1.65c-.455-.456-1.022-.642-1.65-.726c-.594-.08-1.344-.08-2.242-.08m3.196 4.752c-.005-.847-.019-1.758-.064-2.097c-.063-.461-.17-.659-.3-.789s-.328-.237-.79-.3c-.482-.064-1.13-.066-2.094-.066s-1.612.002-2.095.067c-.461.062-.659.169-.789.3s-.237.327-.3.788c-.045.34-.06 1.25-.064 2.097Q9.34 5.999 10 6h4q.662 0 1.248.002M12 9.25a.75.75 0 0 1 .75.75v.01c1.089.274 2 1.133 2 2.323a.75.75 0 0 1-1.5 0c0-.384-.426-.916-1.25-.916s-1.25.532-1.25.916s.426.917 1.25.917c1.385 0 2.75.96 2.75 2.417c0 1.19-.911 2.048-2 2.323V18a.75.75 0 0 1-1.5 0v-.01c-1.089-.274-2-1.133-2-2.323a.75.75 0 0 1 1.5 0c0 .384.426.916 1.25.916s1.25-.532 1.25-.916s-.426-.917-1.25-.917c-1.385 0-2.75-.96-2.75-2.417c0-1.19.911-2.049 2-2.323V10a.75.75 0 0 1 .75-.75"
+                    clip-rule="evenodd" />
+            </svg>
+        </div>
+        <div class="report-card" (click)="_clientsReport()">
+            <h4>Reporte de Clientes</h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M21 2H6a2 2 0 0 0-2 2v3H2v2h2v2H2v2h2v2H2v2h2v3a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1m-8 2.999c1.648 0 3 1.351 3 3A3.01 3.01 0 0 1 13 11c-1.647 0-3-1.353-3-3.001c0-1.649 1.353-3 3-3M19 18H7v-.75c0-2.219 2.705-4.5 6-4.5s6 2.281 6 4.5z" />
+            </svg>
+        </div>
+        <div class="report-card" (click)="_productsReport()">
+            <h4>Reporte del Inventario <br>de Productos</h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" viewBox="0 0 512 512">
+                <path fill="currentColor"
+                    d="M509.5 184.6L458.9 32.8C452.4 13.2 434.1 0 413.4 0H272v192h238.7c-.4-2.5-.4-5-1.2-7.4M240 0H98.6c-20.7 0-39 13.2-45.5 32.8L2.5 184.6c-.8 2.4-.8 4.9-1.2 7.4H240zM0 224v240c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V224z" />
+            </svg>
+        </div>
+        <div class="report-card" (click)="_suppliesReport()">
+            <h4>Reporte del Inventario <br>de Insumos</h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" viewBox="0 0 512 512">
+                <path fill="currentColor"
+                    d="M509.5 184.6L458.9 32.8C452.4 13.2 434.1 0 413.4 0H272v192h238.7c-.4-2.5-.4-5-1.2-7.4M240 0H98.6c-20.7 0-39 13.2-45.5 32.8L2.5 184.6c-.8 2.4-.8 4.9-1.2 7.4H240zM0 224v240c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V224z" />
+            </svg>
+        </div>
+    </main>
+</div>
