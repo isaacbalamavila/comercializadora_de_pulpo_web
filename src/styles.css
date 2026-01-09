@@ -448,7 +448,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: transparent;
+  background: var(--hover-color-btn);
 }
 
 /** Table */

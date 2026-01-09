@@ -1,3 +1,112 @@
 <div class="container">
-    <h2>Este es el resumen de Hoy</h2>
+    <header>
+        <h1>{{_pageTitle()}}.</h1>
+        <user-info />
+    </header>
+    @if (_isLoading()) {
+    <div class="loading">
+        <div class="small-cards-container">
+            <div class="small-card skeleton-shimmer">
+            </div>
+            <div class="small-card skeleton-shimmer">
+            </div>
+            <div class="small-card skeleton-shimmer">
+            </div>
+        </div>
+        <div class="graphics-container">
+            <div class="purchases-graphic skeleton-shimmer">
+            </div>
+            <div class="sales-graphic skeleton-shimmer">
+            </div>
+        </div>
+    </div>
+    }
+    @else if (_error()) {
+    <page-error [statusCode]="_error()!.statusCode" />
+    }
+    @else{
+    <main>
+        <div class="small-cards-container">
+            <div class="small-card">
+                <div class="header">
+                    <span class="title">Fecha actual</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M416 64h-16V48.45c0-8.61-6.62-16-15.23-16.43A16 16 0 0 0 368 48v16H144V48.45c0-8.61-6.62-16-15.23-16.43A16 16 0 0 0 112 48v16H96a64 64 0 0 0-64 64v12a4 4 0 0 0 4 4h440a4 4 0 0 0 4-4v-12a64 64 0 0 0-64-64m61 112H35a3 3 0 0 0-3 3v237a64 64 0 0 0 64 64h320a64 64 0 0 0 64-64V179a3 3 0 0 0-3-3M224 307.43A28.57 28.57 0 0 1 195.43 336h-70.86A28.57 28.57 0 0 1 96 307.43v-70.86A28.57 28.57 0 0 1 124.57 208h70.86A28.57 28.57 0 0 1 224 236.57Z" />
+                    </svg>
+                </div>
+                <span class="content">
+                    {{_today()|date: 'dd/MM/YY'}}
+                </span>
+            </div>
+            <div class="small-card">
+                <div class="header">
+                    <span class="title">{{_isAdminOrManager() ?'Ventas del día' :'Tus ventas del día'}}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 256 256">
+                        <path fill="currentColor"
+                            d="m239.76 158.06l-22.48-89.94A16 16 0 0 0 201.75 56H136V40a16 16 0 0 0-16-16H80a16 16 0 0 0-16 16v16h-9.75a16 16 0 0 0-15.53 12.12l-22.48 89.94A8 8 0 0 0 16 160v32a16 16 0 0 0 16 16h192a16 16 0 0 0 16-16v-32a8 8 0 0 0-.24-1.94M168 88h16a8 8 0 0 1 0 16h-16a8 8 0 0 1 0-16m0 32h16a8 8 0 0 1 0 16h-16a8 8 0 0 1 0-16m-32-32a8 8 0 0 1 0 16h-16a8 8 0 0 1 0-16Zm8 40a8 8 0 0 1-8 8h-16a8 8 0 0 1 0-16h16a8 8 0 0 1 8 8M80 40h40v16H80Zm-8 48h16a8 8 0 0 1 0 16H72a8 8 0 0 1 0-16m0 32h16a8 8 0 0 1 0 16H72a8 8 0 0 1 0-16m152 72H32v-24h192Z" />
+                    </svg>
+                </div>
+                <span class="content">
+                    {{(_dashboard()?.todaySales ?? 0)|number}}
+                </span>
+            </div>
+            <div class="small-card">
+                <div class="header">
+                    <span class="title">{{_isAdminOrManager() ?'Compras del día' :'Tus compras del día'}}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M11.707 2.293A1 1 0 0 0 11 2H6a1 1 0 0 0-.707.293l-3 3A1 1 0 0 0 2 6v5c0 .266.105.52.293.707l10 10a.997.997 0 0 0 1.414 0l8-8a1 1 0 0 0 0-1.414zM8.353 10a1.647 1.647 0 1 1-.001-3.293A1.647 1.647 0 0 1 8.353 10" />
+                    </svg>
+                </div>
+                <span class="content">
+                    {{(_dashboard()?.todayPurchases ?? 0)|number}}
+                </span>
+            </div>
+            @if (_isAdminOrManager()) {
+            <div class="small-card">
+                <div class="header">
+                    <span class="title">Clientes registrados este mes</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M21 2H6a2 2 0 0 0-2 2v3H2v2h2v2H2v2h2v2H2v2h2v3a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1m-8 2.999c1.648 0 3 1.351 3 3A3.01 3.01 0 0 1 13 11c-1.647 0-3-1.353-3-3.001c0-1.649 1.353-3 3-3M19 18H7v-.75c0-2.219 2.705-4.5 6-4.5s6 2.281 6 4.5z" />
+                    </svg>
+                </div>
+                <span class="content">
+                    {{(_dashboard()?.monthClients ?? 0)|number}}
+                </span>
+            </div>
+            }
+            @else{
+            <div class="small-card">
+                <div class="header">
+                    <span class="title">Tu tiempo en la empresa</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 24 24">
+                        <g fill="none">
+                            <path
+                                d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                            <path fill="currentColor"
+                                d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 4a1 1 0 0 0-1 1v5a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V7a1 1 0 0 0-1-1" />
+                        </g>
+                    </svg>
+                </div>
+                <span class="content">
+                    {{(_dashboard()?.daysOfWork ?? 0)|number}} días
+                </span>
+            </div>
+            }
+        </div>
+        <div class="graphics-container">
+            <div class="purchases-graphic">
+                <h3>{{_isAdminOrManager() ?'Compras de la semana':'Tus compras de la semana'}}</h3>
+                <canvas #purchasesChart></canvas>
+
+            </div>
+            <div class="sales-graphic">
+                <h3>{{_isAdminOrManager() ?'Ventas de la semana':'Tus ventas de la semana'}}</h3>
+                <canvas #salesChart></canvas>
+            </div>
+        </div>
+    </main>
+    }
 </div>

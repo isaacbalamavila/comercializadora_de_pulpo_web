@@ -14,7 +14,8 @@
     <div class="menu">
 
         @for (route of safeRoutes; track $index) {
-        <a class="menu-item" [routerLink]="route.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: route.exact }">
+        <a class="menu-item" [routerLink]="route.route" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: route.exact }">
             <i [innerHTML]="route.icon"></i>
             <span>{{route.label}}</span>
         </a>

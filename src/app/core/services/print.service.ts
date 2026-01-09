@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { logoBase64 } from '../../../../public/imageBase64';
 import { ClientsReport, ProductsReport, PurchasesReport, SalesReport, SuppliesReport } from '@interfaces/Reports/ReportsDTO';
 import { phoneFormatter } from '@utils/phone-formatter';
+import { capitalize } from '@utils/capitalize';
 
 (pdfMake as any).vfs =
   (pdfFonts as any).pdfMake?.vfs || (pdfFonts as any).vfs;
@@ -73,7 +74,7 @@ export class PrintService {
         {
           text: [
             { text: 'Le atendió: ', bold: true },
-            `${this.capitalize(ticket.employee)}.`,
+            `${capitalize(ticket.employee)}.`,
           ],
           fontSize: 8,
           margin: [0, 1]
@@ -101,7 +102,7 @@ export class PrintService {
         {
           text: [
             { text: 'Cliente: ', bold: true },
-            `${this.capitalize(ticket.client)}.`
+            `${capitalize(ticket.client)}.`
           ],
           fontSize: 8,
           margin: [0, 1]
@@ -127,7 +128,7 @@ export class PrintService {
                 { text: 'Subtotal', alignment: 'center', bold: true },
               ],
               ...ticket.products.map(p => [
-                { text: this.capitalize(p.name), alignment: 'left' },
+                { text: capitalize(p.name), alignment: 'left' },
                 {
                   text: p.quantity, alignment: 'center'
                 },
@@ -243,10 +244,10 @@ export class PrintService {
                 { text: 'Total', alignment: 'center', bold: true, color: 'white', fillColor: '#000000' },
               ],
               ...report.sales.map(s => [
-                { text: this.capitalize(s.client), alignment: 'left' },
-                { text: this.capitalize(s.employee), alignment: 'center' },
+                { text: capitalize(s.client), alignment: 'left' },
+                { text: capitalize(s.employee), alignment: 'center' },
                 { text: `${this.datePipe.transform(s.date, 'dd/MM/yyyy')}`, alignment: 'center' },
-                { text: `${this.capitalize(s.paymentMethod)}`, alignment: 'center' },
+                { text: `${capitalize(s.paymentMethod)}`, alignment: 'center' },
                 { text: `$${s.total.toFixed(2)}`, alignment: 'center' }
               ])
             ]
@@ -342,9 +343,9 @@ export class PrintService {
                 { text: 'Total', alignment: 'center', bold: true, color: 'white', fillColor: '#000000' },
               ],
               ...report.purchases.map(p => [
-                { text: this.capitalize(p.sku), alignment: 'left' },
-                { text: this.capitalize(p.supplier), alignment: 'center' },
-                { text: this.capitalize(p.rawMaterial), alignment: 'center' },
+                { text: capitalize(p.sku), alignment: 'left' },
+                { text: capitalize(p.supplier), alignment: 'center' },
+                { text: capitalize(p.rawMaterial), alignment: 'center' },
                 { text: `${this.datePipe.transform(p.date, 'dd/MM/yyyy')}`, alignment: 'center' },
                 { text: `${p.totalKg} KG`, alignment: 'center' },
                 { text: `$${p.totalKg.toFixed(2)}`, alignment: 'center' },
@@ -441,7 +442,7 @@ export class PrintService {
                 { text: 'Fecha de Registro', alignment: 'center', bold: true, color: 'white', fillColor: '#000000' },
               ],
               ...report.clients.map(c => [
-                { text: this.capitalize(c.name), alignment: 'left' },
+                { text: capitalize(c.name), alignment: 'left' },
                 { text: c.email, alignment: 'center' },
                 { text: phoneFormatter(c.phone), alignment: 'center' },
                 { text: c.rfc?.toUpperCase() ?? '-', alignment: 'center' },
@@ -539,7 +540,7 @@ export class PrintService {
               ],
               ...report.products.map(p => [
                 { text: p.sku, alignment: 'center' },
-                { text: this.capitalize(p.name), alignment: 'left' },
+                { text: capitalize(p.name), alignment: 'left' },
                 { text: `${p.content} ${p.unit}`, alignment: 'center' },
                 { text: p.quantity, alignment: 'center' },
               ])
@@ -636,7 +637,7 @@ export class PrintService {
               ],
               ...report.supplies.map(s => [
                 { text: s.sku, alignment: 'center' },
-                { text: this.capitalize(s.rawMaterial), alignment: 'center' },
+                { text: capitalize(s.rawMaterial), alignment: 'center' },
                 { text: `${s.originalWeightKg} KG`, alignment: 'center' },
                 { text: `${s.remainWeightKg} KG`, alignment: 'center' },
                 { text: `${this.datePipe.transform(s.purchaseDate, 'dd/MM/yyyy')}`, alignment: 'center' },
@@ -662,17 +663,6 @@ export class PrintService {
     };
 
     pdfMake.createPdf(docDefinition as any).download(fileName)
-  }
-
-  // Helper Function
-  private capitalize(text: string): string {
-    if (!text) return '';
-
-    return text
-      .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
   }
 
 }

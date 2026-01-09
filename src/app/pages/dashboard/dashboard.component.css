@@ -1,0 +1,129 @@
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 1rem;
+
+  .small-cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .small-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      background-color: white;
+      padding: 0.75rem 1rem 1.5rem;
+      border-radius: 0.5rem;
+      user-select: none;
+      transition: transform 0.3s ease-in-out;
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .title {
+          font-weight: 500;
+          font-size: 0.9rem;
+        }
+      }
+
+      .content {
+        text-transform: capitalize;
+        font-size: 2rem;
+        text-align: right;
+        font-weight: 650;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  .graphics-container {
+    flex: 1;
+
+    display: flex;
+    gap: 1rem;
+
+    .purchases-graphic {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .sales-graphic {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      gap: 1rem;
+    }
+  }
+}
+
+.loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 1rem;
+
+  .small-cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 6.875rem;
+
+    .small-card {
+      flex: 1;
+      border-radius: 0.5rem;
+    }
+  }
+  .graphics-container {
+    flex: 1;
+
+    display: flex;
+    gap: 1rem;
+
+    .purchases-graphic {
+      flex: 1;
+    }
+
+    .sales-graphic {
+      flex: 3;
+    }
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #e0e0e0 25%,
+    #f0f0f0 50%,
+    #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

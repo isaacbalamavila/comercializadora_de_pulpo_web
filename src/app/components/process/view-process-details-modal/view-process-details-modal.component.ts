@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { BaseModalComponent } from '@base-ui/base-modal/base-modal.component';
 import { StatusLabelComponent } from '@base-ui/status-labels/status-labels.component';
@@ -13,7 +13,7 @@ import { ProcessesService } from '@services/processes.service';
 
 @Component({
   selector: 'app-view-process-details-modal',
-  imports: [BaseModalComponent, PageLoaderComponent, PageErrorComponent, DatePipe, StatusLabelComponent, CopyButtonComponent,
+  imports: [BaseModalComponent, PageLoaderComponent, PageErrorComponent, StatusLabelComponent, CopyButtonComponent,
     CommonModule
   ],
   templateUrl: './view-process-details-modal.component.html',
