@@ -7,6 +7,7 @@ import { logoBase64 } from '../../../../public/imageBase64';
 import { ClientsReport, ProductsReport, PurchasesReport, SalesReport, SuppliesReport } from '@interfaces/Reports/ReportsDTO';
 import { phoneFormatter } from '@utils/phone-formatter';
 import { capitalize } from '@utils/capitalize';
+import { NotificationService } from './notifications.service';
 
 (pdfMake as any).vfs =
   (pdfFonts as any).pdfMake?.vfs || (pdfFonts as any).vfs;
@@ -17,6 +18,7 @@ import { capitalize } from '@utils/capitalize';
 export class PrintService {
 
   private datePipe = inject(DatePipe);
+  private _notificationService = inject(NotificationService);
 
   saleTicket(ticket: SaleDetailsDTO): void {
 
@@ -177,6 +179,14 @@ export class PrintService {
 
   salesReport(report: SalesReport): void {
 
+    if (report.sales.length === 0) {
+      this._notificationService.error(
+        "Sin ventas registradas",
+        "No se encontraron ventas en el período seleccionado para generar el reporte."
+      );
+      return;
+    }
+
     const fileName = `reporte_ventas_${this.datePipe.transform(report.startDate, 'yyyy-MM-dd', 'UTC')}_al_${this.datePipe.transform(report.endDate, 'yyyy-MM-dd', 'UTC')}`
 
     var docDefinition = {
@@ -273,6 +283,14 @@ export class PrintService {
   }
 
   purchasesReport(report: PurchasesReport): void {
+
+    if (report.purchases.length === 0) {
+      this._notificationService.error(
+        "Sin compras registradas",
+        "No se encontraron compras en el período seleccionado para generar el reporte."
+      );
+      return;
+    }
 
     const fileName = `reporte_compras_${this.datePipe.transform(report.startDate, 'yyyy-MM-dd', 'UTC')}_al_${this.datePipe.transform(report.endDate, 'yyyy-MM-dd', 'UTC')}`
 
@@ -375,6 +393,14 @@ export class PrintService {
 
   clientsReport(report: ClientsReport): void {
 
+    if (report.clients.length === 0) {
+      this._notificationService.error(
+        "Sin clientes registrados",
+        "No se encontraron clientes registrados en el período seleccionado para generar el reporte."
+      );
+      return;
+    }
+
     const fileName = `reporte_clientes_${this.datePipe.transform(report.startDate, 'yyyy-MM-dd', 'UTC')}_al_${this.datePipe.transform(report.endDate, 'yyyy-MM-dd', 'UTC')}`
 
     var docDefinition = {
@@ -472,6 +498,14 @@ export class PrintService {
 
   productsReport(report: ProductsReport): void {
 
+    if (report.products.length === 0) {
+      this._notificationService.error(
+        "Sin productos registrados",
+        "No se encontraron productos producidos en el período seleccionado para generar el reporte."
+      );
+      return;
+    }
+
     const fileName = `reporte__inventario_productos_${this.datePipe.transform(report.startDate, 'yyyy-MM-dd', 'UTC')}_al_${this.datePipe.transform(report.endDate, 'yyyy-MM-dd', 'UTC')}`
 
     var docDefinition = {
@@ -566,6 +600,14 @@ export class PrintService {
     pdfMake.createPdf(docDefinition as any).download(fileName)
   }
   suppliesReport(report: SuppliesReport): void {
+
+    if (report.supplies.length === 0) {
+      this._notificationService.error(
+        "Sin insumos registrados",
+        "No se encontraron insumos adquiridos en el período seleccionado para generar el reporte."
+      );
+      return;
+    }
 
     const fileName = `reporte_inventario_insumos_${this.datePipe.transform(report.startDate, 'yyyy-MM-dd', 'UTC')}_al_${this.datePipe.transform(report.endDate, 'yyyy-MM-dd', 'UTC')}`
 
