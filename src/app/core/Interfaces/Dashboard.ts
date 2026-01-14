@@ -3,7 +3,7 @@ export interface DashboardDTO {
     todaySales: number;
     todayPurchases: number;
     daysOfWork?: number;
-    monthClients?: number;
+    currentProcesses ?: number;
     weekPurchases: number[];
     weekSales: number[];
 }
